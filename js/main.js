@@ -115,3 +115,4 @@ if (minibar) {
     minibar.querySelectorAll("a").forEach(a => a.tabIndex = on ? 0 : -1);
   }, { rootMargin: "-80px 0px 0px 0px" }).observe(document.querySelector(".hero-wrap"));
 }
+

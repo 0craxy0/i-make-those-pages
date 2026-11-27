@@ -1,11 +1,11 @@
 # DESIGN.md: I Make Those Pages
 
 Theme: **developer style, Obsidian colours.** Dark charcoal, light grey text, one violet accent.
-The hero is animated ASCII art of a sunset (WebGL), and the demo shows both the page and its real HTML.
+The hero background is React Bits' Gradient ASCII (WebGL2) rising from the bottom like a sunset, and the demo shows both the page and its real HTML.
 
 ## Rules
 - Purple is the Obsidian violet accent only. No other hues apart from the green inside the demo preview.
-- Gradients only in two places: the ASCII art's colour ramp and the loading skeleton shimmer. Never on text, buttons or backgrounds.
+- Gradients only in two places: the Gradient ASCII hero and the loading skeleton shimmer. Never on text, buttons or backgrounds.
 - No drop shadows, glass, glows or orbs. Structure comes from 1px `--line` borders.
 - No emoji, sparkles, fake testimonials, made-up stats or fake terminals. The code panel shows the real HTML of the preview.
 - No em dashes in copy, no "not X, it's Y" lines. Sentence case.
@@ -36,7 +36,7 @@ Radius 4px. 1px borders. Buttons are solid blocks, never pills.
 
 ## Motion
 All of it is off under `prefers-reduced-motion`.
-- **ASCII hero** (`js/sun.js`): a sunset drawn in characters from a glyph atlas, coloured with a violet ramp that drifts across it. The cursor lights up characters near it, the sun leans toward the mouse and sinks as you scroll. Falls back to a flat CSS sun.
+- **Gradient ASCII hero** (`js/gradient-ascii.js`): React Bits' GradientASCII component, ported from React to plain JS with its shaders untouched. Shape `rise`, Obsidian violets, JetBrains Mono glyphs. Characters scramble under the cursor and a click sends a wave. Keep the glow low in the hero so the headline, tagline and buttons stay on dark background. Falls back to a flat CSS sun without WebGL2.
 - **Decrypt headline**: each line unscrambles from symbols on load. On desktop it thins from 800 to 350 weight as you scroll away. The lines never rewrap.
 - **Magnetic buttons**: the hero CTA follows the cursor slightly (fine pointers only).
 - **Parallax**: hero text and demo at different speeds (desktop only). Section headings drift at most 40px, so they can't touch the content below.
@@ -44,5 +44,5 @@ All of it is off under `prefers-reduced-motion`.
 - **Scroll-driven reveals** and the demo skeleton.
 
 ## Brand moments
-- The sun appears as ASCII art in the hero, rising at the top edge of the contact section, and in the logo.
+- The sunset glow appears in the hero, rising at the top edge of the contact section, and in the logo.
 - The footer ends on a huge "I make those." sign-off.
