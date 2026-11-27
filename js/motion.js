@@ -31,8 +31,19 @@
   // Scrollytelling: one pinned scene, scroll position picks the step
   const scene = document.querySelector(".story-scroll");
   const stage = document.getElementById("stage");
-  const beats = [...document.querySelectorAll(".beat")];
-  const root = document.documentElement;
+  const storyNav = document.getElementById("storyNav");
+  const storyDesc = document.getElementById("storyDesc");
+  const beats = storyNav ? [...storyNav.querySelectorAll(".line-sidebar__item")] : [];
+  const STEP_TEXT = [
+    "Tell me what your startup does and who it's for. You get your own order page with a fixed quote, and you pay half to start.",
+    "You get a live preview link. Point at what you want changed and I change it. Happy with it? Pay the other half.",
+    "I hand over the finished page and the code. Put it on your own domain. It's yours."
+  ];
+  const jumpTo = i => {
+    const span = scene.offsetHeight - innerHeight;
+    scrollTo({ top: scene.offsetTop + span * ((i + 0.5) / beats.length), behavior: still ? "auto" : "smooth" });
+  };
+  const sidebar = storyNav && window.RB ? window.RB.lineSidebar(storyNav, { defaultActive: 0, proximityRadius: 90, onItemClick: jumpTo }) : null;
   let current = 0;
 
   let sy = scrollY;           // smoothed scroll
@@ -69,7 +80,8 @@
       if (idx !== current) {
         current = idx;
         stage.dataset.stage = String(idx + 1);
-        beats.forEach((b, i) => { b.classList.toggle("on", i === idx); b.classList.toggle("done", i < idx); });
+        if (sidebar) sidebar.setActive(idx);
+        if (storyDesc) storyDesc.textContent = STEP_TEXT[idx];
       }
     }
 
@@ -80,12 +92,4 @@
   addEventListener("resize", kick);
   running = true; frame();
 
-  // Click a step to jump to it
-  beats.forEach((b, i) => {
-    b.style.cursor = "pointer";
-    b.addEventListener("click", () => {
-      const span = scene.offsetHeight - innerHeight;
-      scrollTo({ top: scene.offsetTop + span * ((i + 0.5) / beats.length), behavior: still ? "auto" : "smooth" });
-    });
-  });
 })();

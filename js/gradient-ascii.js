@@ -859,4 +859,20 @@ if (asciiHost) {
     onReady: () => document.documentElement.classList.add("gl")
   });
 }
+
+// Smaller ASCII pieces elsewhere on the page: data-ascii="eclipse" (bento card), "rise-soft" (story band)
+const PRESETS = {
+  eclipse: { shape: "eclipse", cellSize: 12, density: 0.85, glow: 0.2, scale: 0.9, flow: 0.7, speed: 0.7, gradientOpacity: 0.55, mouseInteraction: true },
+  "rise-soft": { shape: "rise", cellSize: 14, density: 0.6, glow: 0.1, scale: 0.8, flow: 0.5, speed: 0.5, gradientOpacity: 0.3, glyphOpacity: 0.5, mouseInteraction: false, intro: false }
+};
+document.querySelectorAll("[data-ascii]").forEach(el => {
+  const preset = PRESETS[el.dataset.ascii];
+  if (!preset) return;
+  mountGradientASCII(el, {
+    colors: ["#2E2059", "#7B53E6", "#A88BFA", "#E8E0FF"],
+    characters: " .:-=+xX0S8#@",
+    fontFamily: '"JetBrains Mono", ui-monospace, monospace',
+    ...preset
+  });
+});
 })();

@@ -99,9 +99,10 @@ if (form) {
     const bad = fields.filter(el => !check(el));
     if (bad.length) { bad[0].focus(); return; }
     const btn = $("sendBtn");
-    const label = btn.firstChild.textContent;
+    const labelNode = (btn.querySelector(".specular-button__label") || btn).firstChild;
+    const label = labelNode.textContent;
     btn.disabled = true; btn.classList.add("busy");
-    btn.firstChild.textContent = "Sending your order ";
+    labelNode.textContent = "Sending your order ";
     const f = Object.fromEntries(new FormData(form));
     try {
       const res = await fetch(`${API}/create-order`, {
@@ -119,7 +120,7 @@ if (form) {
       formErr.textContent = `${err.message || "Couldn't send your order."} You can also email me at ${EMAIL}.`;
       formErr.hidden = false;
       btn.disabled = false; btn.classList.remove("busy");
-      btn.firstChild.textContent = label;
+      labelNode.textContent = label;
     }
   });
 }

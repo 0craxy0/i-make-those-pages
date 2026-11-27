@@ -5,11 +5,12 @@ The hero background is React Bits' Gradient ASCII (WebGL2) rising from the botto
 
 ## Rules
 - Purple is the Obsidian violet accent only. No other hues apart from the green inside the demo preview.
-- Effects only in two places: the Gradient ASCII hero and the HoloMosaic behind the contact section. Never two effects on screen at once, and text never sits straight on an effect: it goes on a solid panel or on dark background. Never on text, buttons or backgrounds.
-- No drop shadows, glass, glows or orbs. Structure comes from 1px `--line` borders.
+- One full-bleed background effect on screen at a time: Gradient ASCII in the hero, HoloMosaic behind the contact section. Contained visuals inside a card or band (the bento eclipse, the faint ASCII in "How it works") are fine. Text never sits straight on an effect: it goes on a solid panel or on dark background.
+- Light only comes from the components: the bento cursor glow, the specular edge on main buttons. No drop shadows, glass or orbs. Structure comes from 1px `--line` borders.
+- Every new section uses a vault component (see Components) before anything hand-made.
 - No emoji, sparkles, fake testimonials, made-up stats or fake terminals. The code panel shows the real HTML of the preview.
 - No em dashes in copy, no "not X, it's Y" lines. Sentence case.
-- The proof strip only states measured facts about this page. Re-measure if the page changes.
+- The bento figures only state measured facts about this page (weight, file count, cookies). Re-measure when the page changes.
 
 ## Colour (Obsidian default dark)
 | Token | Value | Role |
@@ -32,7 +33,34 @@ The hero background is React Bits' Gradient ASCII (WebGL2) rising from the botto
 All self-hosted in `assets/fonts/`.
 
 ## Shape
-Radius 4px. 1px borders. Buttons are solid blocks, never pills.
+| Token | Value | Role |
+|---|---|---|
+| `--card-r` | 14px | Bento cards, list rows, panels, forms, demo |
+| `--btn-r` | 10px | Buttons, slide-to-pay track |
+| (base) | 4px | Inputs, tags, small chips |
+
+1px borders. Buttons are solid blocks, never pills.
+
+## Components
+From the Obsidian vault "Diagrams", ported from React to plain JS in `js/react-bits.js` (`window.RB`), `js/gradient-ascii.js` and `js/holo-mosaic.js`. Shaders and logic stay as written; only the React wrapper changes.
+
+| Vault component | Used for | Hook |
+|---|---|---|
+| Gradient ASCII | Hero background (`rise`), bento eclipse (`eclipse`), story band (`rise-soft`) | `#heroAscii`, `[data-ascii]` |
+| HoloMosaic | Contact section background | `js/holo-mosaic.js` |
+| Magic Bento | "What you get" grid | `[data-bento]` |
+| Line Sidebar | "How it works" step nav | `RB.lineSidebar` in `js/motion.js` |
+| Animated List | "The deal" terms | `[data-animated-list]` |
+| Specular Button | Hero, minibar and send buttons | `[data-specular]` |
+| Slide Commit | Pay deposit and balance on `order.html` | `RB.slideCommit` in `js/order.js` |
+
+Held for later, with the reason:
+- **Depth Carousel, Drift Wall**: need real client work to show. Use for a portfolio once there are 3+ shipped pages.
+- **Scroll Expand**: needs a real screen recording or photo to expand into.
+- **Bell Toggle**: for buyer email updates, once automatic emails exist.
+- **Flip Card**: order summary or a before/after of a client page.
+- **Ferrofluid, Pattern Waves**: full-bleed backgrounds, so only as a swap for an existing one, never a third.
+- **Peek Rating**: only with real reviews. No fake proof.
 
 ## Motion
 All of it is off under `prefers-reduced-motion`.

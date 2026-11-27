@@ -27,7 +27,7 @@
 <div class="minibar" id="minibar" aria-hidden="true">
   <div class="wrap minibar-in">
     <a href="#" class="brand" tabindex="-1"><img src="assets/logo-mark.svg" alt="" width="28" height="28">I Make Those Pages</a>
-    <a href="#contact" class="btn small" tabindex="-1">Get your page made</a>
+    <a href="#contact" class="btn small" tabindex="-1" data-specular>Get your page made</a>
   </div>
 </div>
 
@@ -47,7 +47,7 @@
       <h1><span class="line">Your startup</span> <span class="line">needs a page.</span> <span class="line">I make those.</span></h1>
       <p class="sub">Clean, fast landing pages that explain what you do in five seconds. You tell me the idea, I build it, you own it.</p>
       <div class="ctas">
-        <a href="#contact" class="btn" data-magnet>Get your page made</a>
+        <a href="#contact" class="btn" data-magnet data-specular>Get your page made</a>
         <a href="#how" class="link">See how it works</a>
       </div>
     </div>
@@ -86,41 +86,92 @@
       <h2>What you get</h2>
       <p class="lead">One page that makes your startup look legit on day one, and nothing it doesn't need.</p>
     </div>
-    <ul class="features">
-      <li><img src="assets/icons/design.svg" alt="" width="28" height="28"><div><h3>Custom design</h3><p>Built around your brand, your colours and what you actually do.</p></div></li>
-      <li><img src="assets/icons/mobile.svg" alt="" width="28" height="28"><div><h3>Works on phones</h3><p>Looks right on mobile, tablet and desktop. I check it on real screens.</p></div></li>
-      <li><img src="assets/icons/fast.svg" alt="" width="28" height="28"><div><h3>Loads fast</h3><p>Light code, so people see your page straight away and stick around.</p></div></li>
-      <li><img src="assets/icons/copy.svg" alt="" width="28" height="28"><div><h3>Words that make sense</h3><p>I help you say what you do so people get it first time.</p></div></li>
-    </ul>
-
-    <div class="proof">
-      <h3>This page is the proof.</h3>
-      <dl>
-        <div><dt>&lt;230 KB</dt><dd>for the whole page, fonts included</dd></div>
-        <div><dt>0</dt><dd>cookies or trackers</dd></div>
-        <div><dt>7</dt><dd>files of plain HTML, CSS and JS. No frameworks.</dd></div>
-      </dl>
+    <div class="magic-bento" data-bento>
+      <div class="magic-bento__cell span-2 row-2"><div class="magic-bento__card">
+        <span class="magic-bento__light"></span>
+        <div class="magic-bento__content">
+          <div class="magic-bento__header"><img class="magic-bento__icon" src="assets/icons/design.svg" alt="" width="16" height="16"><span class="magic-bento__label">Custom design</span></div>
+          <div class="magic-bento__visual bento-ascii" data-ascii="eclipse" aria-hidden="true"></div>
+          <div class="magic-bento__text"><h3 class="magic-bento__title">Built around your startup</h3><p class="magic-bento__description">Your colours, your words and what you actually do, drawn from scratch for you.</p></div>
+        </div>
+        <span class="magic-bento__rim"></span><span class="magic-bento__border"></span>
+      </div></div>
+      <div class="magic-bento__cell"><div class="magic-bento__card">
+        <span class="magic-bento__light"></span>
+        <div class="magic-bento__content">
+          <div class="magic-bento__header"><img class="magic-bento__icon" src="assets/icons/mobile.svg" alt="" width="16" height="16"><span class="magic-bento__label">Works on phones</span></div>
+          <div class="magic-bento__visual" aria-hidden="true"><div class="devices"><i class="d-laptop"></i><i class="d-tablet"></i><i class="d-phone"></i></div></div>
+          <div class="magic-bento__text"><h3 class="magic-bento__title">Checked on real screens</h3><p class="magic-bento__description">Looks right on phones, tablets and laptops.</p></div>
+        </div>
+        <span class="magic-bento__rim"></span><span class="magic-bento__border"></span>
+      </div></div>
+      <div class="magic-bento__cell"><div class="magic-bento__card">
+        <span class="magic-bento__light"></span>
+        <div class="magic-bento__content">
+          <div class="magic-bento__header"><img class="magic-bento__icon" src="assets/icons/fast.svg" alt="" width="16" height="16"><span class="magic-bento__label">This page, measured</span></div>
+          <div class="magic-bento__visual"><p class="bento-figure">&lt;290 KB</p></div>
+          <div class="magic-bento__text"><h3 class="magic-bento__title">Loads fast</h3><p class="magic-bento__description">The whole page, fonts included.</p></div>
+        </div>
+        <span class="magic-bento__rim"></span><span class="magic-bento__border"></span>
+      </div></div>
+      <div class="magic-bento__cell"><div class="magic-bento__card">
+        <span class="magic-bento__light"></span>
+        <div class="magic-bento__content">
+          <div class="magic-bento__header"><img class="magic-bento__icon" src="assets/icons/copy.svg" alt="" width="16" height="16"><span class="magic-bento__label">Words</span></div>
+          <div class="magic-bento__visual"><p class="rewrite"><s>Synergising expense workflows.</s><span>Expenses, sorted.</span></p></div>
+          <div class="magic-bento__text"><h3 class="magic-bento__title">Words that make sense</h3><p class="magic-bento__description">I help you say what you do.</p></div>
+        </div>
+        <span class="magic-bento__rim"></span><span class="magic-bento__border"></span>
+      </div></div>
+      <div class="magic-bento__cell"><div class="magic-bento__card">
+        <span class="magic-bento__light"></span>
+        <div class="magic-bento__content">
+          <div class="magic-bento__header"><span class="magic-bento__label">This page, measured</span></div>
+          <div class="magic-bento__visual"><p class="bento-figure">0</p></div>
+          <div class="magic-bento__text"><h3 class="magic-bento__title">Cookies or trackers</h3><p class="magic-bento__description">Nothing follows your visitors around.</p></div>
+        </div>
+        <span class="magic-bento__rim"></span><span class="magic-bento__border"></span>
+      </div></div>
+      <div class="magic-bento__cell span-full"><div class="magic-bento__card">
+        <span class="magic-bento__light"></span>
+        <div class="magic-bento__content bento-row">
+          <div class="bento-row__text">
+            <div class="magic-bento__header"><span class="magic-bento__label">This page, measured</span></div>
+            <p class="bento-figure">8 files</p>
+            <h3 class="magic-bento__title">Plain HTML, CSS and JS</h3>
+            <p class="magic-bento__description">No frameworks and nothing to install. Every file opens in any editor, and once you've paid, they're yours.</p>
+          </div>
+          <ul class="bento-files" aria-label="The files this page loads">
+            <li>index.html</li><li>css/styles.css</li><li>js/main.js</li><li>js/motion.js</li>
+            <li>js/react-bits.js</li><li>js/gradient-ascii.js</li><li>js/holo-mosaic.js</li><li>js/consent.js</li>
+          </ul>
+        </div>
+        <span class="magic-bento__rim"></span><span class="magic-bento__border"></span>
+      </div></div>
     </div>
   </section>
 
   <section id="how" class="band story-scroll">
     <div class="story-sticky">
+      <div class="story-ascii" data-ascii="rise-soft" aria-hidden="true"></div>
       <div class="wrap story">
         <div class="story-steps">
           <h2>How it works</h2>
-          <div class="rail" aria-hidden="true"><i id="railFill"></i></div>
-          <ol class="beats">
-            <li class="beat on" data-stage="1"><span>1</span><div><h3>Tell me about it</h3><p>What your startup does, who it's for, and any logo or colours you've already got. That's the brief.</p></div></li>
-            <li class="beat" data-stage="2"><span>2</span><div><h3>Check the draft</h3><p>You get a live preview link. Point at what you want changed, I change it.</p></div></li>
-            <li class="beat" data-stage="3"><span>3</span><div><h3>Go live</h3><p>I hand over the finished page and the code. Put it on your own domain. It's yours.</p></div></li>
-          </ol>
+          <nav class="line-sidebar line-sidebar--markers line-sidebar--scale-tick" id="storyNav" aria-label="Steps">
+            <ul class="line-sidebar__list">
+              <li class="line-sidebar__item" data-stage="1"><span class="line-sidebar__marker" aria-hidden="true"></span><span class="line-sidebar__label"><span class="line-sidebar__index">01</span><span class="line-sidebar__text">Order and get a quote</span></span></li>
+              <li class="line-sidebar__item" data-stage="2"><span class="line-sidebar__marker" aria-hidden="true"></span><span class="line-sidebar__label"><span class="line-sidebar__index">02</span><span class="line-sidebar__text">Check the draft</span></span></li>
+              <li class="line-sidebar__item" data-stage="3"><span class="line-sidebar__marker" aria-hidden="true"></span><span class="line-sidebar__label"><span class="line-sidebar__index">03</span><span class="line-sidebar__text">Go live</span></span></li>
+            </ul>
+          </nav>
+          <p class="story-desc" id="storyDesc" aria-live="polite">Tell me what your startup does and who it's for. You get your own order page with a fixed quote, and you pay half to start.</p>
         </div>
         <div class="story-stage" aria-hidden="true">
           <div class="stage-progress"><i id="stageFill"></i></div>
           <div class="frame stage" id="stage" data-stage="1">
           <div class="frame-bar"><span class="url">Example project: Fernway (made up)</span><b class="live">Live</b></div>
           <div class="brief">
-            <p><b>Name</b>Fernway</p><p><b>What it does</b>Expenses for small trade crews</p><p><b>Colours</b><i style="background:#2F7D5B"></i><i style="background:#16302A"></i></p><p><b>Logo</b>Got one, sending it over</p>
+            <p><b>Name</b>Fernway</p><p><b>What it does</b>Expenses for small trade crews</p><p><b>Colours</b><span><i style="background:#2F7D5B"></i><i style="background:#16302A"></i></span></p><p><b>Logo</b>Got one, sending it over</p>
           </div>
           <div class="frame-body page">
             <div class="f-nav"><b>Fernway</b><i>Get started</i></div>
@@ -135,19 +186,21 @@
     </div>
   </section>
 
-  <section id="deal" class="wrap section">
-    <div class="split" data-depth="0.08">
+  <section id="deal" class="wrap section deal-layout">
+    <div class="deal-head" data-depth="0.08">
       <h2>The deal</h2>
       <p class="lead">Loads of people online promise a site then vanish. Here's how I work instead.</p>
     </div>
-    <dl class="deal">
-      <div><dt>Draft first</dt><dd>You see the page before anything's final.</dd></div>
-      <div><dt>You own it</dt><dd>Once it's paid for, the code and the page are yours outright.</dd></div>
-      <div><dt>Price up front</dt><dd>You get a fixed quote on your order page before you pay a penny. No surprise fees.</dd></div>
-      <div><dt>No logins</dt><dd>I never ask for your passwords or account details.</dd></div>
-      <div><dt>Track it live</dt><dd>Your order page shows exactly which step your site is on.</dd></div>
-      <div><dt>Open work</dt><dd>My code's on GitHub, so you can see how I build.</dd></div>
-    </dl>
+    <div class="animated-list" data-animated-list id="dealList" aria-label="The deal">
+      <div class="animated-list__track">
+          <div class="animated-list__item"><span class="animated-list__lead">01</span><span class="animated-list__text"><span class="animated-list__title">Draft first</span><span class="animated-list__description">You see the page before anything's final.</span></span><span class="animated-list__rim" aria-hidden="true"></span></div>
+          <div class="animated-list__item"><span class="animated-list__lead">02</span><span class="animated-list__text"><span class="animated-list__title">You own it</span><span class="animated-list__description">Once it's paid for, the code and the page are yours outright.</span></span><span class="animated-list__rim" aria-hidden="true"></span></div>
+          <div class="animated-list__item"><span class="animated-list__lead">03</span><span class="animated-list__text"><span class="animated-list__title">Price up front</span><span class="animated-list__description">A fixed quote on your order page before you pay a penny. No surprise fees.</span></span><span class="animated-list__rim" aria-hidden="true"></span></div>
+          <div class="animated-list__item"><span class="animated-list__lead">04</span><span class="animated-list__text"><span class="animated-list__title">No logins</span><span class="animated-list__description">I never ask for your passwords or account details.</span></span><span class="animated-list__rim" aria-hidden="true"></span></div>
+          <div class="animated-list__item"><span class="animated-list__lead">05</span><span class="animated-list__text"><span class="animated-list__title">Track it live</span><span class="animated-list__description">Your order page shows exactly which step your site is on.</span></span><span class="animated-list__rim" aria-hidden="true"></span></div>
+          <div class="animated-list__item"><span class="animated-list__lead">06</span><span class="animated-list__text"><span class="animated-list__title">Open work</span><span class="animated-list__description">My code's on GitHub, so you can see how I build.</span></span><span class="animated-list__rim" aria-hidden="true"></span></div>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -176,7 +229,7 @@
       <label>Tell me about it<textarea name="description" minlength="20" maxlength="4000" required aria-describedby="e-description" placeholder="What your startup does, who it's for, what the page needs to say, and any sites you like."></textarea><span class="err" id="e-description" hidden>Tell me a bit more about your startup (at least 20 characters).</span></label>
       <label class="hp" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label>
       <p class="fine">Hosting, your domain, and keeping the site updated against security vulnerabilities aren't included. I can do those for an extra fee.</p>
-      <button class="btn" type="submit" id="sendBtn">Send my order <img src="assets/icons/send.svg" alt="" width="16" height="16"></button>
+      <button class="btn" type="submit" id="sendBtn" data-specular>Send my order <img src="assets/icons/send.svg" alt="" width="16" height="16"></button>
       <p class="err" id="formErr" role="alert" hidden></p>
       <p class="note">Sending is free. Nothing is charged until you accept a quote. See the <a href="terms.html">terms</a> and <a href="privacy.html">privacy policy</a>.</p>
     </form>
@@ -196,6 +249,7 @@
 
 <script src="js/main.js"></script>
 <script src="js/consent.js"></script>
+<script src="js/react-bits.js"></script>
 <script src="js/motion.js"></script>
 <script src="js/gradient-ascii.js"></script>
 <script src="js/holo-mosaic.js"></script>

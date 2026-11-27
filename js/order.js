@@ -71,8 +71,8 @@
         a.className = "link"; a.textContent = "See your draft";
         const wrap = document.createElement("p"); wrap.append(a); q.append(wrap);
       }
-      if (o.status === "quoted") payButton(q, "deposit", `Accept and pay ${gbp(o.deposit_pence)} deposit`);
-      if (o.status === "draft_ready") payButton(q, "balance", `Approve draft and pay ${gbp(o.balance_pence)}`);
+      if (o.status === "quoted") payButton(q, "deposit", `Slide to pay ${gbp(o.deposit_pence)} deposit`);
+      if (o.status === "draft_ready") payButton(q, "balance", `Slide to approve and pay ${gbp(o.balance_pence)}`);
       if (o.status === "quoted" || o.status === "draft_ready") {
         p("Payments go through Stripe. I never see your card details.", "fine");
         const agree = document.createElement("p"); agree.className = "fine";
@@ -83,19 +83,29 @@
   }
 
   function payButton(parent, kind, text) {
+    const err = document.createElement("p"); err.className = "err"; err.hidden = true; err.setAttribute("role", "alert");
+    const startPay = async () => {
+      err.hidden = true;
+      const res = await fetch(`${API}/pay`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ t: token, kind }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.url) throw new Error(data.error || "Couldn't start the payment.");
+      setTimeout(() => { location.href = data.url; }, 450);
+    };
+    if (window.RB) {
+      const host = document.createElement("div");
+      parent.append(host, err);
+      window.RB.slideCommit(host, {
+        label: text, doneLabel: "Opening secure checkout", errorLabel: "Couldn't start the payment",
+        onConfirm: startPay,
+        onError: e => { err.textContent = e.message; err.hidden = false; }
+      });
+      return;
+    }
     const b = document.createElement("button");
     b.type = "button"; b.className = "btn"; b.textContent = text;
-    const err = document.createElement("p"); err.className = "err"; err.hidden = true; err.setAttribute("role", "alert");
     b.addEventListener("click", async () => {
-      b.disabled = true; const t = b.textContent; b.textContent = "Opening secure checkout…"; err.hidden = true;
-      try {
-        const res = await fetch(`${API}/pay`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ t: token, kind }) });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok || !data.url) throw new Error(data.error || "Couldn't start the payment.");
-        location.href = data.url;
-      } catch (e) {
-        err.textContent = e.message; err.hidden = false; b.disabled = false; b.textContent = t;
-      }
+      b.disabled = true;
+      try { await startPay(); } catch (e) { err.textContent = e.message; err.hidden = false; b.disabled = false; }
     });
     parent.append(b, err);
   }
