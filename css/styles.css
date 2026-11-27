@@ -14,7 +14,7 @@ a{color:inherit}
 nav{position:sticky;top:0;z-index:10;background:rgba(255,248,241,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
 .logo{font-family:Fraunces,serif;font-weight:700;font-size:1.15rem;text-decoration:none;display:flex;align-items:center;gap:10px}
-.logo i{width:22px;height:22px;border-radius:50%;background:linear-gradient(180deg,var(--sun),var(--coral) 60%,var(--rose));display:inline-block}
+.logo img{display:block}
 nav ul{display:flex;gap:28px;list-style:none;font-size:.95rem}
 nav ul a{text-decoration:none;color:var(--muted)}
 nav ul a:hover{color:var(--ink)}
@@ -57,7 +57,7 @@ h2{font-size:clamp(2rem,4vw,2.8rem);margin-bottom:18px}
 /* legit list */
 .checks{list-style:none;margin-top:34px;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .checks li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px 18px 54px;position:relative}
-.checks li::before{content:"✓";position:absolute;left:18px;top:16px;width:24px;height:24px;border-radius:50%;background:var(--mint);color:#fff;display:grid;place-items:center;font-size:.8rem;font-weight:700}
+.checks li::before{content:"";background:var(--mint) url(../assets/icons/check.svg) center/14px no-repeat !important;position:absolute;left:18px;top:16px;width:24px;height:24px;border-radius:50%;background:var(--mint);color:#fff;display:grid;place-items:center;font-size:.8rem;font-weight:700}
 
 /* contact */
 .contact{background:var(--ink);color:var(--cream);border-radius:28px;padding:64px;display:grid;grid-template-columns:1fr 1.1fr;gap:48px;position:relative;overflow:hidden}
@@ -76,3 +76,6 @@ form .btn{background:linear-gradient(90deg,var(--sun),var(--coral));color:var(--
 
 footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.contact a.mail{display:inline-flex;align-items:center;gap:10px}
+.contact a.mail img{filter:brightness(0) saturate(100%) invert(76%) sepia(60%) saturate(800%) hue-rotate(345deg)}
+footer .gh{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
