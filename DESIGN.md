@@ -28,4 +28,10 @@ Radius 4px everywhere. Structure comes from 2px ink rules and 1px line dividers,
 Custom filled geometric icons in `assets/icons/`, ink on stone. Don't swap in Lucide/Feather.
 
 ## Motion
-Only the demo skeleton while the preview rebuilds. Off under `prefers-reduced-motion`.
+All of it is turned off under `prefers-reduced-motion`.
+- **WebGL sun** (`js/sun.js`): flat-colour sun with stripes that drift, reflected in moving water. It leans toward the mouse and sinks as you scroll. If WebGL isn't available, the flat CSS sun shows instead. It stops drawing when it's off screen.
+- **Kinetic headline**: the words rise in on load, then the weight thins from 800 to 350 as you scroll out of the hero.
+- **Parallax**: the hero text and the demo move at different speeds.
+- **Scrollytelling** ("How it works"): a sticky preview goes from brief, to draft with comment pins, to live as each step scrolls past.
+- **Scroll-driven reveals**: section rules draw in and list items rise, using CSS `animation-timeline: view()`. Browsers without it just show everything.
+- **Demo skeleton** while the "try it" preview rebuilds.

@@ -50,6 +50,7 @@
       </div>
     </div>
   </div>
+  <canvas id="sunGL" aria-hidden="true"></canvas>
   <div class="sun" aria-hidden="true"><i></i><i></i><i></i></div>
 </header>
 
@@ -68,13 +69,28 @@
   </section>
 
   <section id="how" class="band">
-    <div class="wrap section">
-      <h2>How it works</h2>
-      <ol class="steps">
-        <li><span>1</span><h3>Tell me about it</h3><p>What your startup does, who it's for, and any logo or colours you've already got.</p></li>
-        <li><span>2</span><h3>Check the draft</h3><p>You get a live preview link. Tell me what to change, I change it.</p></li>
-        <li><span>3</span><h3>Go live</h3><p>I hand over the finished page and the code. Put it on your own domain. It's yours.</p></li>
-      </ol>
+    <div class="wrap section story">
+      <div class="story-steps">
+        <h2>How it works</h2>
+        <div class="beat" data-stage="1"><span>1</span><h3>Tell me about it</h3><p>What your startup does, who it's for, and any logo or colours you've already got. That's the brief.</p></div>
+        <div class="beat" data-stage="2"><span>2</span><h3>Check the draft</h3><p>You get a live preview link. Point at what you want changed, I change it.</p></div>
+        <div class="beat" data-stage="3"><span>3</span><h3>Go live</h3><p>I hand over the finished page and the code. Put it on your own domain. It's yours.</p></div>
+      </div>
+      <div class="story-stage" aria-hidden="true">
+        <div class="frame stage" id="stage" data-stage="1">
+          <div class="frame-bar"><span class="url">preview.imakethosepages.com/fernway</span><b class="live">Live</b></div>
+          <div class="brief">
+            <p><b>Name</b>Fernway</p><p><b>What it does</b>Expenses for small trade crews</p><p><b>Colours</b><i style="background:#2F7D5B"></i><i style="background:#16302A"></i></p><p><b>Logo</b>Got one, sending it over</p>
+          </div>
+          <div class="frame-body page">
+            <div class="f-nav"><b>Fernway</b><i>Get started</i></div>
+            <p class="f-h">Expenses sorted before the van's back.</p>
+            <p class="f-p">Built for people who'd rather be doing the actual work.</p>
+            <span class="f-btn">Get started</span>
+            <em class="pin p1">Make this bigger</em><em class="pin p2">Greener button?</em>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -128,5 +144,7 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/sun.js"></script>
 </body>
 </html>
