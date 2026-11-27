@@ -4,6 +4,50 @@ const $ = id => document.getElementById(id);
 const yr = $("yr");
 if (yr) yr.textContent = new Date().getFullYear();
 
+// Code tab: the actual HTML for the preview, highlighted
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+function renderCode(name, line) {
+  const out = $("codeOut");
+  if (!out) return;
+  const t = (tag, attrs = "") => `<span class="t">&lt;${tag}</span>${attrs}<span class="t">&gt;</span>`;
+  const c = tag => `<span class="t">&lt;/${tag}&gt;</span>`;
+  const a = (k, v) => ` <span class="a">${k}</span>=<span class="s">"${esc(v)}"</span>`;
+  const x = s => `<span class="x">${esc(s)}</span>`;
+  out.innerHTML = [
+    `${t("header")}`,
+    `  ${t("a", a("class", "logo"))}${x(name)}${c("a")}`,
+    `  ${t("a", a("class", "btn") + a("href", "#start"))}${x("Get started")}${c("a")}`,
+    `${c("header")}`,
+    `${t("h1")}${x(line)}${c("h1")}`,
+    `${t("p")}${x("Built for people who'd rather be doing the actual work.")}${c("p")}`,
+    `${t("a", a("class", "btn") + a("href", "#start"))}${x("Get started")}${c("a")}`
+  ].join("\n");
+}
+const tabP = $("tabPreview"), tabC = $("tabCode");
+if (tabP && tabC) {
+  const show = code => {
+    tabP.setAttribute("aria-selected", String(!code)); tabC.setAttribute("aria-selected", String(code));
+    $("codePanel").hidden = !code; $("frame").hidden = code;
+  };
+  tabP.addEventListener("click", () => show(false));
+  tabC.addEventListener("click", () => show(true));
+  [tabP, tabC].forEach(b => b.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") { const code = b === tabP; show(code); (code ? tabC : tabP).focus(); }
+  }));
+}
+if ($("dName")) renderCode($("dName").value, $("dLine").value);
+
+// Magnetic buttons (desktop pointers only)
+if (matchMedia("(pointer: fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.querySelectorAll("[data-magnet]").forEach(el => {
+    el.addEventListener("pointermove", e => {
+      const r = el.getBoundingClientRect();
+      el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.25}px, ${(e.clientY - r.top - r.height / 2) * 0.35}px)`;
+    });
+    el.addEventListener("pointerleave", () => { el.style.transform = ""; });
+  });
+}
+
 // Live demo: type a startup in, the page rebuilds
 const frame = $("frame");
 if (frame) {
@@ -16,6 +60,7 @@ if (frame) {
     $("pLine").textContent = line;
     $("dUrl").textContent = slug(name);
     frame.classList.remove("loading");
+    renderCode(name, line);
   };
   const onType = () => {
     frame.classList.add("loading");

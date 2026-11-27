@@ -1,42 +1,48 @@
 # DESIGN.md: I Make Those Pages
 
-Theme: warm, crisp, confident. A flat sunset (solid orange, gold sun cut by stripes) opens the page; the rest is calm stone and ink.
-The one bold moment is the hero demo: visitors type their startup in and the page rebuilds.
+Theme: **developer style, Obsidian colours.** Dark charcoal, light grey text, one violet accent.
+The hero is animated ASCII art of a sunset (WebGL), and the demo shows both the page and its real HTML.
 
-## Rules (things this site never does)
-No gradients (except the skeleton shimmer), no drop shadows, no glass, no glows or orbs, no emoji, no sparkles, no neon or pastel fills, no pure white, no purple, no pill shapes, no hover movement, no tick-mark bullets, no rows of three identical cards, no em dashes in copy, no "not X, it's Y" lines.
+## Rules
+- Purple is the Obsidian violet accent only. No other hues apart from the green inside the demo preview.
+- Gradients only in two places: the ASCII art's colour ramp and the loading skeleton shimmer. Never on text, buttons or backgrounds.
+- No drop shadows, glass, glows or orbs. Structure comes from 1px `--line` borders.
+- No emoji, sparkles, fake testimonials, made-up stats or fake terminals. The code panel shows the real HTML of the preview.
+- No em dashes in copy, no "not X, it's Y" lines. Sentence case.
+- The proof strip only states measured facts about this page. Re-measure if the page changes.
 
-## Color
+## Colour (Obsidian default dark)
 | Token | Value | Role |
 |---|---|---|
-| `--ink` | #16302A | Text, buttons, contact section background |
-| `--sun` | #F2643A | Hero and legal header background, step markers |
-| `--gold` | #FFC15A | The sun, link hover on ink |
-| `--leaf` | #2F7D5B | Button hover, accents inside the demo |
-| `--stone` | #EEEBE6 | Page background |
-| `--paper` | #F8F6F2 | Surfaces: demo, form, alternate band |
-| `--muted` | #4F5B56 | Secondary text |
-| `--line` | #D3CDC4 | Dividers, input borders |
+| `--stone` | #1E1E1E | Page background |
+| `--paper` | #262626 | Raised surfaces: demo, story band, contact section |
+| `--field` | #161616 | Inputs, code panel, previews |
+| `--line` | #363636 | Borders and dividers |
+| `--ink` | #DADADA | Text and primary buttons |
+| `--muted` | #A3A3A3 | Secondary text |
+| `--sun` | #7B53E6 | Violet accent fills: step markers, icon tiles, logo (white text on it is 5:1) |
+| `--gold` | #A88BFA | Light violet: hovers, highlights, code tags, comment pins |
+| `--leaf` | #44CF6E | Green, only inside the demo preview and code attributes |
+| error | #FB464C | Form errors |
 
 ## Type
-Bricolage Grotesque (display, 700/800, -0.03em) and Instrument Sans (body 400/500/600, 17px). Both self-hosted in `assets/fonts/`. Sentence case only.
+- Display: Bricolage Grotesque 700/800, tracking -0.03em.
+- Body: Instrument Sans 400/500/600, 17px.
+- Code and ASCII art: JetBrains Mono 400.
+All self-hosted in `assets/fonts/`.
 
 ## Shape
-Radius 4px everywhere. Structure comes from 2px ink rules and 1px line dividers, never shadows.
-
-## Icons
-Custom filled geometric icons in `assets/icons/`, ink on stone. Don't swap in Lucide/Feather.
+Radius 4px. 1px borders. Buttons are solid blocks, never pills.
 
 ## Motion
-All of it is turned off under `prefers-reduced-motion`.
-- **WebGL sun** (`js/sun.js`): flat-colour sun with stripes that drift, reflected in moving water. It leans toward the mouse and sinks as you scroll. If WebGL isn't available, the flat CSS sun shows instead. It stops drawing when it's off screen.
-- **Kinetic headline**: the words rise in on load, then the weight thins from 800 to 350 as you scroll out of the hero.
-- **Parallax**: the hero text and the demo move at different speeds.
-- **Scrollytelling** ("How it works"): a sticky preview goes from brief, to draft with comment pins, to live as each step scrolls past.
-- **Scroll-driven reveals**: section rules draw in and list items rise, using CSS `animation-timeline: view()`. Browsers without it just show everything.
-- **Demo skeleton** while the "try it" preview rebuilds.
+All of it is off under `prefers-reduced-motion`.
+- **ASCII hero** (`js/sun.js`): a sunset drawn in characters from a glyph atlas, coloured with a violet ramp that drifts across it. The cursor lights up characters near it, the sun leans toward the mouse and sinks as you scroll. Falls back to a flat CSS sun.
+- **Decrypt headline**: each line unscrambles from symbols on load. On desktop it thins from 800 to 350 weight as you scroll away. The lines never rewrap.
+- **Magnetic buttons**: the hero CTA follows the cursor slightly (fine pointers only).
+- **Parallax**: hero text and demo at different speeds (desktop only). Section headings drift at most 40px, so they can't touch the content below.
+- **Scrollytelling** ("How it works"): one pinned scene, the preview goes from brief to draft to live.
+- **Scroll-driven reveals** and the demo skeleton.
 
 ## Brand moments
-- The sun shows up three times: setting in the hero (WebGL), rising at the top edge of the contact section, and in the logo. Always flat gold with stripes cut through it.
-- Footer ends on a huge "I make those." sign-off.
-- The proof strip uses real numbers about this page only. Update them if the page changes; never invent stats.
+- The sun appears as ASCII art in the hero, rising at the top edge of the contact section, and in the logo.
+- The footer ends on a huge "I make those." sign-off.

@@ -297,3 +297,104 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:#A3261A;ba
 @media (prefers-reduced-motion:reduce){.minibar{transition:none}}
 .foot{border-top:0;position:relative}
 .foot::before{content:"";position:absolute;left:24px;right:24px;top:0;height:2px;background:var(--ink)}
+
+/* ================= DEV THEME ================= */
+@font-face{font-family:"JetBrains Mono";src:url(../assets/fonts/jbmono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+:root{
+  --ink:#EEEBE6;      /* text + primary buttons */
+  --paper:#121C18;    /* raised surfaces */
+  --stone:#0B1310;    /* page */
+  --muted:#97A59E;
+  --line:#26342E;
+  --leaf:#3FA273;
+  --field:#0E1714;
+  --dark:#0B1310;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+body{background:var(--stone);color:var(--ink)}
+.btn{color:var(--dark)}
+.btn:hover{background:var(--gold);color:var(--dark)}
+.btn.ghost{color:var(--ink);border-color:var(--ink)}
+.btn.ghost:hover{background:var(--paper);color:var(--ink)}
+[data-magnet]{transition:transform .2s ease-out}
+::selection{background:var(--sun);color:var(--dark)}
+
+/* hero: dark, the dithered sun fills it */
+.hero-wrap{background:var(--stone);border-bottom:1px solid var(--line)}
+#sunGL{inset:0;height:100%}
+.gl .hero{padding-bottom:300px}
+.hero .sub{color:var(--muted)}
+.link{color:var(--ink)}
+.sun{background:var(--gold)}
+.sun i{background:var(--stone)}
+.nav ul a{color:var(--muted)}
+.nav ul a:hover{color:var(--ink)}
+
+/* demo with code tab */
+.demo{border:1px solid var(--line);background:var(--paper)}
+.tabs{display:flex;gap:0;border:1px solid var(--line);border-bottom:0;width:max-content}
+.tabs button{font:500 .82rem var(--body);background:none;border:0;color:var(--muted);padding:7px 14px;cursor:pointer;border-right:1px solid var(--line)}
+.tabs button:last-child{border-right:0}
+.tabs button[aria-selected="true"]{background:var(--field);color:var(--ink)}
+.code{margin:0;background:var(--field);border:1px solid var(--line);padding:16px 18px;font:400 .8rem/1.75 var(--mono);color:var(--muted);overflow:auto;min-height:262px;white-space:pre-wrap;word-break:break-word}
+.code .t{color:var(--gold)}.code .a{color:var(--leaf)}.code .s{color:var(--sun)}.code .x{color:var(--ink)}
+.frame,.brief,.skeleton{background:var(--field)}
+.frame{border-color:var(--line)}
+.f-nav i{border-color:var(--leaf);color:var(--leaf)}
+.f-btn{color:var(--dark)}
+.skeleton i{background:linear-gradient(90deg,#16231E 0,#1E2D27 50%,#16231E 100%) 0 0/200% 100%}
+input,select,textarea{background:var(--field);color:var(--ink);border-color:var(--line)}
+input::placeholder,textarea::placeholder{color:#5F6E67}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+:focus-visible{outline-color:var(--gold)}
+
+/* sections */
+.band{background:var(--paper)}
+.features,.deal,.proof{border-top-color:var(--ink)}
+.features::before,.deal::before{background:var(--ink)}
+.features img{border-color:var(--sun)}
+.steps span,.beat span{border-color:var(--ink);color:var(--dark)}
+.beat span{background:var(--paper);color:var(--ink)}
+.beat.on span,.beat.done span{background:var(--sun);color:var(--dark)}
+.stage{border:1px solid var(--line)}
+.pin{color:var(--dark);border-color:var(--dark)}
+.live{color:var(--dark)}
+
+/* contact on a raised surface */
+.contact-wrap{background:var(--paper);color:var(--ink);border-top:1px solid var(--line)}
+.sunrise i{background:var(--stone)}
+.form{background:var(--stone);border:1px solid var(--line)}
+.mail:hover{color:var(--gold)}
+.err{color:#FF8E72}
+input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:#FF8E72;background:#22140F}
+.mcta{color:var(--dark)}
+
+/* chrome */
+.minibar{background:rgba(11,19,16,1);border-bottom:1px solid var(--line)}
+.consent{background:var(--paper);border:1px solid var(--line)}
+.legal-top{background:var(--stone);border-bottom:1px solid var(--line)}
+.legal p,.legal li{color:var(--muted)}
+.foot{color:var(--muted)}
+.foot::before{background:var(--line)}
+.signoff{color:var(--ink)}
+
+/* ================= OBSIDIAN PALETTE ================= */
+:root{
+  --stone:#1E1E1E;   /* page (Obsidian background-primary) */
+  --paper:#262626;   /* raised surfaces (background-secondary-alt) */
+  --field:#161616;   /* inputs, code, previews (background-secondary) */
+  --line:#363636;    /* borders */
+  --ink:#DADADA;     /* text, primary buttons (text-normal) */
+  --muted:#A3A3A3;   /* secondary text */
+  --sun:#7B53E6;     /* violet accent fills (interactive-accent) */
+  --gold:#A88BFA;    /* light violet: highlights, hovers, links */
+  --leaf:#44CF6E;    /* Obsidian green, demo preview only */
+  --dark:#1E1E1E;
+}
+.beat.on span,.beat.done span,.steps span{color:#fff}
+.err{color:#FB464C}
+input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:#FB464C;background:#2A1A1B}
+.skeleton i{background:linear-gradient(90deg,#222 0,#2E2E2E 50%,#222 100%) 0 0/200% 100%}
+.minibar{background:var(--stone)}
+.code .t{color:var(--gold)}.code .a{color:var(--leaf)}.code .s{color:#E0DEF4}.code .x{color:var(--ink)}
+.pin{background:var(--gold)}

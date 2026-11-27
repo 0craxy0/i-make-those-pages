@@ -6,7 +6,7 @@
 <title>I Make Those Pages | Startup pages, made properly</title>
 <meta name="description" content="I build clean, fast landing pages for startups. You see the draft first, the price is agreed up front, and you own the code.">
 <link rel="canonical" href="https://i-make-those-pages.netlify.app/">
-<meta name="theme-color" content="#F2643A">
+<meta name="theme-color" content="#1E1E1E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="I Make Those Pages">
 <meta property="og:title" content="I Make Those Pages | Startup pages, made properly">
@@ -47,7 +47,7 @@
       <h1><span class="line">Your startup</span> <span class="line">needs a page.</span> <span class="line">I make those.</span></h1>
       <p class="sub">Clean, fast landing pages that explain what you do in five seconds. You tell me the idea, I build it, you own it.</p>
       <div class="ctas">
-        <a href="#contact" class="btn">Get your page made</a>
+        <a href="#contact" class="btn" data-magnet>Get your page made</a>
         <a href="#how" class="link">See how it works</a>
       </div>
     </div>
@@ -58,7 +58,12 @@
         <label>Name<input id="dName" value="Fernway" maxlength="24"></label>
         <label>What it does<input id="dLine" value="Expenses sorted before the van's back." maxlength="60"></label>
       </div>
-      <div class="frame" id="frame" aria-live="polite">
+      <div class="tabs" role="tablist" aria-label="Demo view">
+        <button type="button" role="tab" id="tabPreview" aria-selected="true" aria-controls="frame">Preview</button>
+        <button type="button" role="tab" id="tabCode" aria-selected="false" aria-controls="codePanel">Code</button>
+      </div>
+      <pre class="code" id="codePanel" role="tabpanel" aria-labelledby="tabCode" hidden><code id="codeOut"></code></pre>
+      <div class="frame" id="frame" role="tabpanel" aria-labelledby="tabPreview" aria-live="polite">
         <div class="frame-bar"><span id="dUrl">fernway.com</span></div>
         <div class="frame-body">
           <div class="f-nav"><b id="pName">Fernway</b><i>Get started</i></div>
@@ -77,7 +82,7 @@
 
 <main>
   <section id="what" class="wrap section">
-    <div class="split" data-depth="0.12">
+    <div class="split" data-depth="0.08">
       <h2>What you get</h2>
       <p class="lead">One page that makes your startup look legit on day one, and nothing it doesn't need.</p>
     </div>
@@ -91,9 +96,9 @@
     <div class="proof">
       <h3>This page is the proof.</h3>
       <dl>
-        <div><dt>&lt;140 KB</dt><dd>for the whole page, fonts included</dd></div>
+        <div><dt>&lt;170 KB</dt><dd>for the whole page, fonts included</dd></div>
         <div><dt>0</dt><dd>cookies or trackers</dd></div>
-        <div><dt>3</dt><dd>files of code you'd own: HTML, CSS, JS</dd></div>
+        <div><dt>6</dt><dd>files of plain HTML, CSS and JS. No frameworks.</dd></div>
       </dl>
     </div>
   </section>
@@ -131,7 +136,7 @@
   </section>
 
   <section id="deal" class="wrap section">
-    <div class="split" data-depth="0.12">
+    <div class="split" data-depth="0.08">
       <h2>The deal</h2>
       <p class="lead">Loads of people online promise a site then vanish. Here's how I work instead.</p>
     </div>
@@ -149,8 +154,8 @@
 <section id="contact" class="contact-wrap">
   <div class="sunrise" aria-hidden="true"><i></i><i></i></div>
   <div class="wrap contact">
-    <div>
-      <h2 data-depth="0.1">Got a startup? Let's make its page.</h2>
+    <div data-depth="0.08">
+      <h2>Got a startup? Let's make its page.</h2>
       <p class="sub">Fill in the form or just email me. I'll get back to you about what you need.</p>
       <a class="mail" href="mailto:lennyvincentsingh@gmail.com"><img src="assets/icons/mail.svg" alt="" width="22" height="22">lennyvincentsingh@gmail.com</a>
     </div>

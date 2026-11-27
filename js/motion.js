@@ -3,13 +3,22 @@
   const lerp = (a, b, t) => a + (b - a) * t;
   const clamp = (v, lo = 0, hi = 1) => Math.min(Math.max(v, lo), hi);
 
-  // Kinetic headline
+  // Kinetic headline: each line decrypts from scrambled characters
   const h1 = document.querySelector(".hero h1");
   if (h1 && !still) {
-    let i = 0;
-    h1.querySelectorAll(".line").forEach(line => {
-      line.innerHTML = line.textContent.trim().split(/\s+/)
-        .map(w => `<span class="w"><span style="--i:${i++}">${w}</span></span>`).join(" ");
+    const glyphs = "!<>-_\\/[]{}=+*^?#01";
+    h1.querySelectorAll(".line").forEach((line, li) => {
+      const final = line.textContent;
+      const start = performance.now() + li * 180;
+      const dur = 900;
+      const tick = now => {
+        const k = Math.min(Math.max((now - start) / dur, 0), 1);
+        const done = Math.floor(k * final.length);
+        line.textContent = final.split("").map((ch, i) =>
+          i < done || ch === " " ? ch : glyphs[(Math.random() * glyphs.length) | 0]).join("");
+        if (k < 1) requestAnimationFrame(tick); else line.textContent = final;
+      };
+      requestAnimationFrame(tick);
     });
   }
 
@@ -47,7 +56,7 @@
     if (!still) for (const d of depth) {
       const r = d.el.parentElement.getBoundingClientRect();
       if (r.bottom < -200 || r.top > vh + 200) continue;
-      const off = (r.top + r.height / 2 - vh / 2) * d.k;
+      const off = clamp((r.top + r.height / 2 - vh / 2) * d.k, -40, 40);   // .split has 56px below it
       d.el.style.transform = `translate3d(0,${off.toFixed(1)}px,0)`;
     }
 
