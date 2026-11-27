@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /thanks.html
 
-Sitemap: https://0craxy0.github.io/i-make-those-pages/sitemap.xml
+Sitemap: https://i-make-those-pages.netlify.app/sitemap.xml

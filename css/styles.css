@@ -143,7 +143,10 @@ textarea{min-height:120px;resize:vertical}
 .gl .sun{display:none}
 
 /* kinetic headline */
-h1{font-weight:var(--wght,800);letter-spacing:var(--track,-.03em)}
+h1{font-weight:var(--wght,800)}
+.hero-text{container-type:inline-size}
+.hero h1{font-size:min(5.4rem,15cqi)}
+h1 .line{display:block;white-space:nowrap}
 h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
 h1 .w>span{display:inline-block;transform:translateY(105%);animation:wordIn .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.1s + var(--i) * .07s)}
 @keyframes wordIn{to{transform:none}}

@@ -18,7 +18,7 @@
   const bar = document.createElement("div");
   bar.className = "consent"; bar.setAttribute("role", "region"); bar.setAttribute("aria-label", "Cookie settings");
   bar.hidden = true;
-  const priv = location.pathname.includes("/i-make-those-pages/") ? "/i-make-those-pages/privacy.html" : "privacy.html";
+  const priv = "/privacy.html";
   bar.innerHTML = `<p>Can I count your visit? No cookies, no ads, just anonymous stats so I know if anyone's looking. <a href="${priv}">Privacy policy</a></p>
     <div><button type="button" class="btn small" data-v="yes">That's fine</button><button type="button" class="btn small ghost" data-v="no">No thanks</button></div>`;
   document.body.appendChild(bar);

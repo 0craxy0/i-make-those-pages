@@ -7,13 +7,16 @@
   const h1 = document.querySelector(".hero h1");
   if (h1 && !still) {
     let i = 0;
-    h1.innerHTML = h1.textContent.trim().split(/\s+/)
-      .map(w => `<span class="w"><span style="--i:${i++}">${w}</span></span>`).join(" ");
+    h1.querySelectorAll(".line").forEach(line => {
+      line.innerHTML = line.textContent.trim().split(/\s+/)
+        .map(w => `<span class="w"><span style="--i:${i++}">${w}</span></span>`).join(" ");
+    });
   }
 
   const hero = document.querySelector(".hero-wrap");
   const text = document.querySelector(".hero-text");
   const demo = document.querySelector(".demo");
+  const sub = document.querySelector(".hero .sub");
   const depth = [...document.querySelectorAll("[data-depth]")].map(el => ({ el, k: +el.dataset.depth, y: 0 }));
 
   // Scrollytelling: one pinned scene, scroll position picks the step
@@ -37,8 +40,7 @@
       text.style.transform = `translate3d(0,${sy * 0.3}px,0)`;
       demo.style.transform = `translate3d(0,${sy * 0.12}px,0)`;
       h1.style.setProperty("--wght", Math.round(800 - p * 450));
-      h1.style.setProperty("--track", (-0.03 + p * 0.05).toFixed(3) + "em");
-      text.style.opacity = (1 - p * 0.9).toFixed(3);
+      const o = (1 - p * 0.9).toFixed(3); h1.style.opacity = o; sub.style.opacity = o;
     }
 
     // Depth layers: drift relative to the middle of the screen
