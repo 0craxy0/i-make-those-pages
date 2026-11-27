@@ -6,14 +6,11 @@
 <title>I Make Those Pages | Startup pages, made properly</title>
 <meta name="description" content="I build clean, fast landing pages for startups. You see the draft first and you own the code.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<header class="sky">
+<header class="hero-wrap">
   <nav class="wrap nav">
     <a href="#" class="brand"><img src="assets/logo-mark.svg" alt="" width="34" height="34">I Make Those Pages</a>
     <ul>
@@ -21,49 +18,52 @@
       <li><a href="#how">How it works</a></li>
       <li><a href="#deal">The deal</a></li>
     </ul>
-    <a href="#contact" class="btn light small">Contact me</a>
+    <a href="#contact" class="btn small">Contact me</a>
   </nav>
 
   <div class="wrap hero">
     <div class="hero-text">
-      <p class="status"><span></span>Taking new projects</p>
       <h1>Your startup needs a page. I make those.</h1>
       <p class="sub">Clean, fast landing pages that explain what you do in five seconds. You tell me the idea, I build it, you own it.</p>
       <div class="ctas">
-        <a href="#contact" class="btn light">Get your page made</a>
-        <a href="#how" class="btn outline-light">See how it works</a>
+        <a href="#contact" class="btn">Get your page made</a>
+        <a href="#how" class="link">See how it works</a>
       </div>
     </div>
 
-    <div class="mock" aria-hidden="true">
-      <div class="mock-bar"><i></i><i></i><i></i><span>fernway.app</span></div>
-      <div class="mock-body">
-        <div class="m-nav b" style="--d:0"><b>Fernway</b><em>Get started</em></div>
-        <div class="m-h b" style="--d:1">Expenses sorted before the van's back.</div>
-        <div class="m-p b" style="--d:2">Receipts, mileage and invoices for small trade crews. One app, no spreadsheets.</div>
-        <div class="m-btn b" style="--d:3">Try it free</div>
-        <div class="m-tiles">
-          <div class="b" style="--d:4"><span></span>Snap receipts</div>
-          <div class="b" style="--d:5"><span></span>Track miles</div>
-          <div class="b" style="--d:6"><span></span>Send invoices</div>
+    <div class="demo">
+      <p class="demo-label">Try it. Type your startup in.</p>
+      <div class="demo-inputs">
+        <label>Name<input id="dName" value="Fernway" maxlength="24"></label>
+        <label>What it does<input id="dLine" value="Expenses sorted before the van's back." maxlength="60"></label>
+      </div>
+      <div class="frame" id="frame" aria-live="polite">
+        <div class="frame-bar"><span id="dUrl">fernway.com</span></div>
+        <div class="frame-body">
+          <div class="f-nav"><b id="pName">Fernway</b><i>Get started</i></div>
+          <p class="f-h" id="pLine">Expenses sorted before the van's back.</p>
+          <p class="f-p">Built for people who'd rather be doing the actual work.</p>
+          <span class="f-btn">Get started</span>
+          <div class="f-rows"><div><span></span>Sign up in a minute</div><div><span></span>Works on your phone</div></div>
         </div>
+        <div class="skeleton" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       </div>
     </div>
   </div>
-  <div class="sun" aria-hidden="true"></div>
+  <div class="sun" aria-hidden="true"><i></i><i></i><i></i></div>
 </header>
 
 <main>
   <section id="what" class="wrap section">
     <div class="split">
       <h2>What you get</h2>
-      <p class="lead">One page that makes your startup look legit on day one. Nothing it doesn't need.</p>
+      <p class="lead">One page that makes your startup look legit on day one, and nothing it doesn't need.</p>
     </div>
     <ul class="features">
-      <li><img src="assets/icons/design.svg" alt="" width="26" height="26"><div><h3>Custom design</h3><p>Built around your brand, not a template a thousand other startups are using.</p></div></li>
-      <li><img src="assets/icons/mobile.svg" alt="" width="26" height="26"><div><h3>Works on phones</h3><p>Looks right on mobile, tablet and desktop. Checked on real screens, not guessed.</p></div></li>
-      <li><img src="assets/icons/fast.svg" alt="" width="26" height="26"><div><h3>Loads fast</h3><p>Light code, so people don't leave before your page even shows up.</p></div></li>
-      <li><img src="assets/icons/copy.svg" alt="" width="26" height="26"><div><h3>Words that make sense</h3><p>I help you say what you do so people get it straight away.</p></div></li>
+      <li><img src="assets/icons/design.svg" alt="" width="28" height="28"><div><h3>Custom design</h3><p>Built around your brand, your colours and what you actually do.</p></div></li>
+      <li><img src="assets/icons/mobile.svg" alt="" width="28" height="28"><div><h3>Works on phones</h3><p>Looks right on mobile, tablet and desktop. I check it on real screens.</p></div></li>
+      <li><img src="assets/icons/fast.svg" alt="" width="28" height="28"><div><h3>Loads fast</h3><p>Light code, so people see your page straight away and stick around.</p></div></li>
+      <li><img src="assets/icons/copy.svg" alt="" width="28" height="28"><div><h3>Words that make sense</h3><p>I help you say what you do so people get it first time.</p></div></li>
     </ul>
   </section>
 
@@ -80,33 +80,33 @@
 
   <section id="deal" class="wrap section">
     <div class="split">
-      <h2>Legit, no catches.</h2>
-      <p class="lead">Loads of people online promise a site then vanish. Here's how I do it instead.</p>
+      <h2>The deal</h2>
+      <p class="lead">Loads of people online promise a site then vanish. Here's how I work instead.</p>
     </div>
-    <ul class="checks">
-      <li>You see the draft before anything's final.</li>
-      <li>You own the code and the page outright.</li>
-      <li>Price agreed up front. No surprise fees.</li>
-      <li>I never ask for your passwords or logins.</li>
-      <li>Real person, real replies, by email.</li>
-      <li>The code's on GitHub, so you can see the work.</li>
-    </ul>
+    <dl class="deal">
+      <div><dt>Draft first</dt><dd>You see the page before anything's final.</dd></div>
+      <div><dt>You own it</dt><dd>Once it's paid for, the code and the page are yours outright.</dd></div>
+      <div><dt>Price up front</dt><dd>We agree the price by email before I start. No surprise fees.</dd></div>
+      <div><dt>No logins</dt><dd>I never ask for your passwords or account details.</dd></div>
+      <div><dt>Real replies</dt><dd>You talk to me, by email. No bots, no support queue.</dd></div>
+      <div><dt>Open work</dt><dd>My code's on GitHub, so you can see how I build.</dd></div>
+    </dl>
   </section>
 </main>
 
-<section id="contact" class="sky sky-bottom">
+<section id="contact" class="contact-wrap">
   <div class="wrap contact">
-    <div class="contact-text">
+    <div>
       <h2>Got a startup? Let's make its page.</h2>
       <p class="sub">Fill in the form or just email me. I'll get back to you about what you need.</p>
       <a class="mail" href="mailto:lennyvincentsingh@gmail.com"><img src="assets/icons/mail.svg" alt="" width="22" height="22">lennyvincentsingh@gmail.com</a>
     </div>
-    <form id="contactForm" class="card">
+    <form id="contactForm" class="form">
       <div class="row">
         <label>Your name<input name="name" autocomplete="name" required></label>
         <label>Your email<input name="email" type="email" autocomplete="email" required></label>
       </div>
-      <label>Startup name or website<input name="startup" placeholder="e.g. fernway.app"></label>
+      <label>Startup name or website<input name="startup" placeholder="e.g. fernway.com"></label>
       <label>What do you need?
         <select name="need">
           <option>A brand new startup page</option>
@@ -115,16 +115,16 @@
         </select>
       </label>
       <label>Tell me about it<textarea name="message" required></textarea></label>
-      <button class="btn dark" type="submit">Send message <img src="assets/icons/send.svg" alt="" width="16" height="16"></button>
-      <p class="note">Opens your email app with everything filled in.</p>
+      <button class="btn" type="submit">Send message <img src="assets/icons/send.svg" alt="" width="16" height="16"></button>
+      <p class="note">Opens your email app with everything filled in. See the <a href="privacy.html">privacy policy</a> for what I do with it.</p>
     </form>
   </div>
 </section>
 
 <footer class="wrap foot">
   <img src="assets/logo.svg" alt="I Make Those Pages" width="200" height="40">
+  <nav><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="https://github.com/0craxy0">GitHub</a></nav>
   <span>© <span id="yr"></span></span>
-  <a href="https://github.com/0craxy0"><img src="assets/icons/code.svg" alt="" width="18" height="18">GitHub</a>
 </footer>
 
 <script src="js/main.js"></script>
