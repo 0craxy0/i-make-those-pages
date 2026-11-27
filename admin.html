@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orders | I Make Those Pages</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#1E1E1E">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="legal-top"><nav class="wrap nav"><a href="index.html" class="brand"><img src="assets/logo-mark.svg" alt="" width="34" height="34">Orders</a><button type="button" class="btn small ghost" id="lockBtn" hidden>Lock</button></nav></header>
+
+<main class="wrap admin">
+  <form class="panel unlock" id="unlock" hidden>
+    <h1>Orders</h1>
+    <p class="muted">Enter your admin key. It's the ADMIN_KEY you set in Supabase. It's remembered on this device only.</p>
+    <div class="copy-row"><input type="password" id="keyInput" autocomplete="current-password" aria-label="Admin key"><button class="btn small">Unlock</button></div>
+    <p class="err" id="unlockErr" role="alert" hidden></p>
+  </form>
+
+  <div id="app" hidden>
+    <div class="admin-grid">
+      <section class="panel" aria-labelledby="listTitle">
+        <div class="row-between"><h2 id="listTitle">Orders</h2><button type="button" class="linkbtn" id="refresh">Refresh</button></div>
+        <ul class="order-list" id="list"></ul>
+      </section>
+      <section class="panel" id="detail" aria-live="polite">
+        <p class="muted">Pick an order.</p>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="js/admin.js"></script>
+</body>
+</html>

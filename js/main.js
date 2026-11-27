@@ -71,28 +71,56 @@ if (frame) {
   $("dLine").addEventListener("input", onType);
 }
 
+const API = "https://wydreptloanesxblcdra.supabase.co/functions/v1";
+
 const form = $("contactForm");
 if (form) {
-  const fields = ["name", "email", "message"].map(n => form.elements[n]);
+  const started = Date.now();
+  const fields = ["name", "email", "description"].map(n => form.elements[n]);
   const check = el => {
-    const ok = el.type === "email" ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()) : el.value.trim().length > 0;
+    const v = el.value.trim();
+    const ok = el.type === "email" ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) : el.name === "description" ? v.length >= 20 : v.length > 0;
     el.setAttribute("aria-invalid", ok ? "false" : "true");
     $("e-" + el.name).hidden = ok;
     return ok;
   };
+  const showServerErrors = fieldsErr => {
+    Object.entries(fieldsErr || {}).forEach(([name, msg]) => {
+      const el = form.elements[name], err = $("e-" + name);
+      if (el) el.setAttribute("aria-invalid", "true");
+      if (err) { err.textContent = msg; err.hidden = false; }
+    });
+  };
   fields.forEach(el => el.addEventListener("input", () => { if (el.getAttribute("aria-invalid") === "true") check(el); }));
-  form.addEventListener("submit", e => {
+  form.addEventListener("submit", async e => {
     e.preventDefault();
+    const formErr = $("formErr");
+    formErr.hidden = true;
     const bad = fields.filter(el => !check(el));
     if (bad.length) { bad[0].focus(); return; }
     const btn = $("sendBtn");
+    const label = btn.firstChild.textContent;
     btn.disabled = true; btn.classList.add("busy");
-    btn.firstChild.textContent = "Opening your email app ";
-    const f = new FormData(form);
-    const subject = `Startup page enquiry: ${f.get("startup") || f.get("name")}`;
-    const body = `Name: ${f.get("name")}\nEmail: ${f.get("email")}\nStartup: ${f.get("startup")}\nNeed: ${f.get("need")}\n\n${f.get("message")}`;
-    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setTimeout(() => { location.href = "thanks.html"; }, 1200);
+    btn.firstChild.textContent = "Sending your order ";
+    const f = Object.fromEntries(new FormData(form));
+    try {
+      const res = await fetch(`${API}/create-order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...f, started })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        showServerErrors(data.fields);
+        throw new Error(data.error || "Something went wrong.");
+      }
+      location.href = `order.html?t=${data.token}&new=1`;
+    } catch (err) {
+      formErr.textContent = `${err.message || "Couldn't send your order."} You can also email me at ${EMAIL}.`;
+      formErr.hidden = false;
+      btn.disabled = false; btn.classList.remove("busy");
+      btn.firstChild.textContent = label;
+    }
   });
 }
 

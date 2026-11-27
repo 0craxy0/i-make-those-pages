@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://i-make-those-pages.netlify.app/">
 <meta property="og:image" content="https://i-make-those-pages.netlify.app/assets/og-image.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Your startup needs a page. I make those. A flat orange sunset with the I Make Those Pages logo.">
+<meta property="og:image:alt" content="Your startup needs a page. I make those. A violet half sun with the I Make Those Pages logo.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -96,7 +96,7 @@
     <div class="proof">
       <h3>This page is the proof.</h3>
       <dl>
-        <div><dt>&lt;225 KB</dt><dd>for the whole page, fonts included</dd></div>
+        <div><dt>&lt;230 KB</dt><dd>for the whole page, fonts included</dd></div>
         <div><dt>0</dt><dd>cookies or trackers</dd></div>
         <div><dt>7</dt><dd>files of plain HTML, CSS and JS. No frameworks.</dd></div>
       </dl>
@@ -143,9 +143,9 @@
     <dl class="deal">
       <div><dt>Draft first</dt><dd>You see the page before anything's final.</dd></div>
       <div><dt>You own it</dt><dd>Once it's paid for, the code and the page are yours outright.</dd></div>
-      <div><dt>Price up front</dt><dd>We agree the price by email before I start. No surprise fees.</dd></div>
+      <div><dt>Price up front</dt><dd>You get a fixed quote on your order page before you pay a penny. No surprise fees.</dd></div>
       <div><dt>No logins</dt><dd>I never ask for your passwords or account details.</dd></div>
-      <div><dt>Real replies</dt><dd>You talk to me, by email. No bots, no support queue.</dd></div>
+      <div><dt>Track it live</dt><dd>Your order page shows exactly which step your site is on.</dd></div>
       <div><dt>Open work</dt><dd>My code's on GitHub, so you can see how I build.</dd></div>
     </dl>
   </section>
@@ -157,25 +157,28 @@
   <div class="wrap contact">
     <div data-depth="0.08">
       <h2>Got a startup? Let's make its page.</h2>
-      <p class="sub">Fill in the form or just email me. I'll get back to you about what you need.</p>
+      <p class="sub">Tell me about it and you'll get your own order page. Your quote shows up there, you pay half to start and half once you've approved the draft, and you can watch every step get ticked off.</p>
       <a class="mail" href="mailto:lennyvincentsingh@gmail.com"><img src="assets/icons/mail.svg" alt="" width="22" height="22">lennyvincentsingh@gmail.com</a>
     </div>
     <form id="contactForm" class="form" novalidate>
       <div class="row">
-        <label>Your name<input name="name" autocomplete="name" required aria-describedby="e-name"><span class="err" id="e-name" hidden>Put your name in so I know who I'm talking to.</span></label>
-        <label>Your email<input name="email" type="email" autocomplete="email" required aria-describedby="e-email"><span class="err" id="e-email" hidden>That email doesn't look right. Check it and try again.</span></label>
+        <label>Your name<input name="name" autocomplete="name" maxlength="100" required aria-describedby="e-name"><span class="err" id="e-name" hidden>Put your name in so I know who I'm talking to.</span></label>
+        <label>Your email<input name="email" type="email" autocomplete="email" maxlength="254" required aria-describedby="e-email"><span class="err" id="e-email" hidden>That email doesn't look right. Check it and try again.</span></label>
       </div>
-      <label>Startup name or website<input name="startup" placeholder="e.g. fernway.com"></label>
+      <label>Startup name or website<input name="startup" maxlength="120" placeholder="e.g. fernway.com" aria-describedby="e-startup"><span class="err" id="e-startup" hidden></span></label>
       <label>What do you need?
         <select name="need">
-          <option>A brand new startup page</option>
-          <option>A redesign of my current page</option>
-          <option>Not sure yet, let's chat</option>
+          <option value="new">A brand new startup page</option>
+          <option value="redesign">A redesign of my current page</option>
+          <option value="unsure">Not sure yet, let's chat</option>
         </select>
       </label>
-      <label>Tell me about it<textarea name="message" required aria-describedby="e-message"></textarea><span class="err" id="e-message" hidden>Tell me a bit about your startup first.</span></label>
-      <button class="btn" type="submit" id="sendBtn">Send message <img src="assets/icons/send.svg" alt="" width="16" height="16"></button>
-      <p class="note">Opens your email app with everything filled in. See the <a href="privacy.html">privacy policy</a> for what I do with it.</p>
+      <label>Tell me about it<textarea name="description" minlength="20" maxlength="4000" required aria-describedby="e-description" placeholder="What your startup does, who it's for, what the page needs to say, and any sites you like."></textarea><span class="err" id="e-description" hidden>Tell me a bit more about your startup (at least 20 characters).</span></label>
+      <label class="hp" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label>
+      <p class="fine">Hosting, your domain, and keeping the site updated against security vulnerabilities aren't included. I can do those for an extra fee.</p>
+      <button class="btn" type="submit" id="sendBtn">Send my order <img src="assets/icons/send.svg" alt="" width="16" height="16"></button>
+      <p class="err" id="formErr" role="alert" hidden></p>
+      <p class="note">Sending is free. Nothing is charged until you accept a quote. See the <a href="terms.html">terms</a> and <a href="privacy.html">privacy policy</a>.</p>
     </form>
   </div>
 </section>

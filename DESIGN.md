@@ -47,3 +47,6 @@ All of it is off under `prefers-reduced-motion`.
 ## Brand moments
 - The sunset glow appears in the hero, rising at the top edge of the contact section, and in the logo.
 - The footer ends on a huge "I make those." sign-off.
+
+## Orders
+Order form on the home page, the buyer's `order.html` and the owner's `admin.html` use the same panels, checklist and buttons. Payment and setup details are in `ORDERS.md`.

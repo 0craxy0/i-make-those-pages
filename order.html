@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your order | I Make Those Pages</title>
+<meta name="description" content="Your private order page: quote, payments and progress.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#1E1E1E">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="legal-top"><nav class="wrap nav"><a href="index.html" class="brand"><img src="assets/logo-mark.svg" alt="" width="34" height="34">I Make Those Pages</a><a href="mailto:lennyvincentsingh@gmail.com" class="btn small" id="mailBtn">Email me</a></nav></header>
+
+<main class="wrap order" id="order" aria-live="polite">
+  <p class="order-loading" id="loading">Loading your order…</p>
+
+  <div id="failed" class="panel" hidden>
+    <h1>Can't find that order</h1>
+    <p class="muted" id="failedMsg"></p>
+    <p class="muted">Check you've got the full link. If you've lost it, email me at <a href="mailto:lennyvincentsingh@gmail.com">lennyvincentsingh@gmail.com</a> with your name and I'll send it again.</p>
+  </div>
+
+  <div id="view" hidden>
+    <div class="save-link panel" id="saveLink" hidden>
+      <h2>Order sent. Save this page.</h2>
+      <p class="muted">This link is the only way back to your order, so bookmark it or copy it somewhere safe. Don't share it: anyone with it can see your order.</p>
+      <div class="copy-row"><input id="linkBox" readonly aria-label="Your order link"><button type="button" class="btn small" id="copyLink">Copy link</button></div>
+    </div>
+
+    <div class="paid-note panel" id="paidNote" hidden></div>
+
+    <div class="order-head">
+      <p class="muted">Order <strong id="ref"></strong>, <span id="placed"></span></p>
+      <h1 id="headline"></h1>
+      <p class="sub" id="subline"></p>
+    </div>
+
+    <div class="order-grid">
+      <section class="panel" aria-labelledby="progressTitle">
+        <h2 id="progressTitle">Progress</h2>
+        <ol class="checklist" id="steps"></ol>
+      </section>
+
+      <div class="order-side">
+        <section class="panel" id="quoteBox" aria-labelledby="quoteTitle">
+          <h2 id="quoteTitle">Your quote</h2>
+          <div id="quoteBody"></div>
+        </section>
+
+        <section class="panel notice" aria-labelledby="notIncluded">
+          <h2 id="notIncluded">Not included</h2>
+          <p>I can't host your website, look after your domain, or keep it maintained and patched against security vulnerabilities unless you pay extra for that. Once I hand it over, running it is up to you. Ask me if you want a price for any of it.</p>
+        </section>
+
+        <details class="panel">
+          <summary>What you asked for</summary>
+          <p class="muted" id="need"></p>
+          <p class="request" id="desc"></p>
+        </details>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="wrap foot">
+  <img src="assets/logo.svg" alt="I Make Those Pages" width="200" height="40">
+  <nav><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></nav>
+  <span>© <span id="yr"></span></span>
+</footer>
+<script src="js/order.js"></script>
+</body>
+</html>

@@ -411,3 +411,78 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:#FB464C;ba
 .contact>div:first-child{background:var(--stone);border:1px solid var(--line);border-radius:var(--r);padding:32px;align-self:start}
 .contact>div:first-child .sub{margin-bottom:24px}
 @media (max-width:520px){.contact>div:first-child{padding:22px}}
+
+/* ---------- orders: form extras, buyer page, admin ---------- */
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.fine{font-size:.84rem;color:var(--muted)}
+.fine a{color:var(--ink)}
+.muted{color:var(--muted)}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.panel h2{font-size:1.35rem;margin-bottom:14px}
+.panel h3{font-size:1.05rem;margin:22px 0 10px}
+.copy-row{display:flex;gap:10px}
+.copy-row input{flex:1;min-width:0}
+.row-between{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 6px}
+.request{white-space:pre-wrap;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:10px;font-size:.95rem}
+details>summary{cursor:pointer;font-weight:600}
+details[open]>summary{margin-bottom:10px}
+
+.order{padding-top:48px;padding-bottom:96px;display:grid;gap:24px}
+.order-loading{color:var(--muted);padding:80px 0}
+.order-head h1{font-size:clamp(2.2rem,5vw,3.4rem);margin:6px 0 8px}
+.order-head .sub{margin:0;color:var(--muted)}
+.order-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:start;margin-top:24px}
+.order-side{display:grid;gap:24px}
+.save-link{border-color:var(--sun)}
+.paid-note{border-color:var(--leaf);color:var(--ink)}
+.notice{border-color:var(--gold)}
+.notice p{color:var(--muted)}
+
+.checklist{list-style:none;display:grid;gap:0;counter-reset:none}
+.checklist li{display:grid;grid-template-columns:28px 1fr;gap:14px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
+.checklist li:last-child{border-bottom:0}
+.checklist .box{width:22px;height:22px;border:2px solid var(--line);border-radius:4px;margin-top:2px}
+.checklist li.done .box{background:var(--sun) url(../assets/icons/check.svg) center/14px no-repeat;border-color:var(--sun)}
+.checklist li.current .box{border-color:var(--gold)}
+.checklist .txt{display:grid}
+.checklist small{color:var(--muted);font-size:.82rem}
+.checklist li.current strong{color:var(--gold)}
+.checklist li:not(.done):not(.current) strong{color:var(--muted);font-weight:500}
+
+.price{font:800 clamp(2.4rem,5vw,3.2rem)/1 var(--display);letter-spacing:-.03em;margin-bottom:12px}
+.split-pay{list-style:none;margin:16px 0;border-top:1px solid var(--line)}
+.split-pay li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+.split-pay li strong{color:var(--ink)}
+.split-pay li.paid strong{color:var(--leaf)}
+#quoteBody .btn{margin:6px 0 10px}
+#quoteBody p{margin-bottom:8px}
+
+.admin{padding-top:40px;padding-bottom:80px}
+.unlock{max-width:520px;display:grid;gap:12px}
+.unlock h1{font-size:2rem}
+.admin-grid{display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start}
+.order-list{list-style:none;display:grid;gap:6px;max-height:70vh;overflow:auto}
+.order-list button{all:unset;box-sizing:border-box;display:grid;gap:2px;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);cursor:pointer;font-size:.9rem}
+.order-list button:focus-visible{outline:3px solid var(--gold)}
+.order-list button.on{border-color:var(--sun);background:var(--field)}
+.order-list button.attention strong::after{content:"  needs you";color:var(--gold);font-weight:500;font-size:.78rem}
+.order-list span,.order-list small{color:var(--muted)}
+.tag{font-size:.8rem;border:1px solid var(--line);border-radius:var(--r);padding:3px 8px;color:var(--gold);white-space:nowrap}
+.who{margin-top:4px}
+.admin-steps label{display:flex;gap:10px;align-items:center;cursor:pointer}
+.admin-steps li{grid-template-columns:1fr}
+.admin-steps input:disabled+span{color:var(--muted)}
+.quote-form{margin-top:22px;display:grid;gap:12px}
+.quote-form label{margin-bottom:10px}
+.danger{color:#FB464C;margin-top:18px}
+.status-msg{min-height:1.2em;color:var(--gold)}
+
+@media (max-width:900px){
+  .order-grid,.admin-grid{grid-template-columns:1fr}
+  .copy-row{flex-direction:column}
+}
+[hidden]{display:none!important}
+.admin-steps input[type=checkbox]{width:20px;height:20px;flex:none;padding:0;margin:0;accent-color:var(--sun)}
+.admin-steps label{display:flex;flex-direction:row;justify-content:flex-start;font-size:.95rem}
+@media (max-width:900px){.order-side{order:-1}}
