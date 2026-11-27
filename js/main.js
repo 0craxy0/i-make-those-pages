@@ -59,3 +59,14 @@ if (mcta) {
   const io = new IntersectionObserver(es => es.forEach(e => { seen[e.target.id === "contact" ? "contact" : "hero"] = e.isIntersecting; upd(); }));
   io.observe(document.querySelector(".hero-wrap")); io.observe($("contact"));
 }
+
+// Compact bar once the hero's scrolled away
+const minibar = $("minibar");
+if (minibar) {
+  new IntersectionObserver(([e]) => {
+    const on = !e.isIntersecting;
+    minibar.classList.toggle("show", on);
+    minibar.setAttribute("aria-hidden", on ? "false" : "true");
+    minibar.querySelectorAll("a").forEach(a => a.tabIndex = on ? 0 : -1);
+  }, { rootMargin: "-80px 0px 0px 0px" }).observe(document.querySelector(".hero-wrap"));
+}

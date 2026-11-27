@@ -248,3 +248,52 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:#A3261A;ba
 .big-num{font:800 clamp(5rem,16vw,11rem)/1 var(--display);letter-spacing:-.05em}
 .small{font-size:1rem}
 @media (prefers-reduced-motion:reduce){.mcta{transition:none}.btn.busy img{animation:none}}
+
+/* ---------- polish pass ---------- */
+/* compact sticky bar */
+.minibar{position:fixed;top:0;left:0;right:0;z-index:40;background:var(--stone);border-bottom:2px solid var(--ink);transform:translateY(-105%);transition:transform .3s ease}
+.minibar.show{transform:none}
+.minibar-in{display:flex;align-items:center;justify-content:space-between;height:60px}
+.minibar .brand{font-size:1rem}
+@media (max-width:900px){.minibar{display:none}}
+
+/* feature icons sit on sun-orange tiles, same as the step markers */
+.features img{width:48px;height:48px;padding:11px;background:var(--sun);border:2px solid var(--ink)}
+.features li{grid-template-columns:48px 1fr}
+
+/* proof strip */
+.proof{margin-top:72px;display:grid;grid-template-columns:1fr 2fr;gap:32px;align-items:start;padding-top:32px;border-top:2px solid var(--ink)}
+.proof h3{font-size:1.6rem;max-width:12ch}
+.proof dl{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.proof dl div{padding:0 24px;border-left:1px solid var(--line)}
+.proof dt{font:800 clamp(2.2rem,4vw,3.2rem)/1 var(--display);letter-spacing:-.04em}
+.proof dd{color:var(--muted);margin-top:8px;font-size:.95rem;max-width:20ch}
+
+/* sunrise: the top edge of the contact section is the horizon */
+.contact-wrap{position:relative}
+.sunrise{position:absolute;right:12%;top:-120px;width:240px;height:120px;border-radius:120px 120px 0 0;background:var(--gold);overflow:hidden}
+.sunrise i{position:absolute;left:0;right:0;background:var(--stone)}
+.sunrise i:nth-child(1){top:74px;height:7px}
+.sunrise i:nth-child(2){top:96px;height:11px}
+.contact{position:relative;z-index:1}
+
+/* footer sign-off */
+.foot-wrap{overflow:hidden}
+.signoff{font:800 min(11rem,14vw)/.85 var(--display);letter-spacing:-.05em;color:var(--ink);padding-top:72px;white-space:nowrap}
+.foot{border-top:2px solid var(--ink);margin-top:28px}
+
+/* story: hide the page under the brief so nothing ghosts through */
+.page{transition:opacity .4s ease}
+.stage[data-stage="1"] .page{opacity:0}
+
+@media (max-width:900px){
+  .proof{grid-template-columns:1fr}
+  .proof dl{grid-template-columns:1fr;gap:20px}
+  .proof dl div{padding:0 0 0 16px}
+  .sunrise{width:150px;height:75px;top:-75px;right:8%}
+  .sunrise i:nth-child(1){top:46px;height:5px}
+  .sunrise i:nth-child(2){top:60px;height:7px}
+}
+@media (prefers-reduced-motion:reduce){.minibar{transition:none}}
+.foot{border-top:0;position:relative}
+.foot::before{content:"";position:absolute;left:24px;right:24px;top:0;height:2px;background:var(--ink)}

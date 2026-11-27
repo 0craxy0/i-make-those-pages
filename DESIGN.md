@@ -35,3 +35,8 @@ All of it is turned off under `prefers-reduced-motion`.
 - **Scrollytelling** ("How it works"): a sticky preview goes from brief, to draft with comment pins, to live as each step scrolls past.
 - **Scroll-driven reveals**: section rules draw in and list items rise, using CSS `animation-timeline: view()`. Browsers without it just show everything.
 - **Demo skeleton** while the "try it" preview rebuilds.
+
+## Brand moments
+- The sun shows up three times: setting in the hero (WebGL), rising at the top edge of the contact section, and in the logo. Always flat gold with stripes cut through it.
+- Footer ends on a huge "I make those." sign-off.
+- The proof strip uses real numbers about this page only. Update them if the page changes; never invent stats.
