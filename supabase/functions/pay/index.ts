@@ -35,7 +35,10 @@ Deno.serve(async (req) => {
 
   const stripe = new Stripe(key, { httpClient: Stripe.createFetchHttpClient() });
   const label = kind === "deposit" ? "Deposit (50%)" : "Rest of payment (50%)";
-  const session = await stripe.checkout.sessions.create({
+  // Managed Payments (Stripe as merchant of record) is on by default on new accounts and needs a
+  // product tax code. Custom design work isn't a digital product it covers, so it's off here.
+  const params = {
+    managed_payments: { enabled: false },
     mode: "payment",
     customer_email: o.email,
     line_items: [{
@@ -53,7 +56,15 @@ Deno.serve(async (req) => {
     payment_intent_data: { metadata: { order_ref: o.ref, kind } },
     success_url: `${SITE}/order.html?t=${t}&paid=${kind}`,
     cancel_url: `${SITE}/order.html?t=${t}`,
-  });
+  } as unknown as Stripe.Checkout.SessionCreateParams;
+
+  let session: Stripe.Checkout.Session;
+  try {
+    session = await stripe.checkout.sessions.create(params);
+  } catch (e) {
+    console.error(e);
+    return json(req, { error: "Couldn't start the payment. Try again, or email me." }, 502);
+  }
 
   const { error: insErr } = await sb.from("payments").insert({
     order_id: o.id, kind, amount_pence: amount, stripe_session_id: session.id,
