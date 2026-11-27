@@ -72,8 +72,16 @@ All of it is off under `prefers-reduced-motion`.
 - **Scrollytelling** ("How it works"): one pinned scene, the preview goes from brief to draft to live.
 - **Scroll-driven reveals** and the demo skeleton.
 
+## Logo
+A violet page with a folded corner and a sun rising from its bottom corner: pages, plus the sunset the brand started with. Concept from Gemini, redrawn as clean vector.
+- `assets/logo-mark.svg`: 4 rays. Header, footer, anything 24px and up.
+- `assets/favicon.svg`, `favicon.ico`, `favicon-32.png`: 3 rays and wider gaps, so it still reads at 16px in a browser tab.
+- `assets/logo.svg`: mark plus "I Make Those Pages" in Bricolage Grotesque 800, converted to outlines (an SVG used as an `<img>` can't load web fonts).
+- App icons and `og-image.png`: the mark on `--stone`.
+- Never recolour it beyond `--sun` and `--ink`, never add a gradient or glow, never stretch it.
+
 ## Brand moments
-- The sunset glow appears in the hero, rising at the top edge of the contact section, and in the logo.
+- The sunset glow appears in the hero, rising at the top edge of the contact section, and in the logo's corner.
 - The footer ends on a huge "I make those." sign-off.
 
 ## Orders
