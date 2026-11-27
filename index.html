@@ -46,7 +46,7 @@
     </div>
 
     <div class="demo">
-      <p class="demo-label">Try it. Type your startup in.</p>
+      <p class="demo-label">Try it. Type your startup in. Fernway is just an example.</p>
       <div class="demo-inputs">
         <label>Name<input id="dName" value="Fernway" maxlength="24"></label>
         <label>What it does<input id="dLine" value="Expenses sorted before the van's back." maxlength="60"></label>
@@ -70,7 +70,7 @@
 
 <main>
   <section id="what" class="wrap section">
-    <div class="split">
+    <div class="split" data-depth="0.12">
       <h2>What you get</h2>
       <p class="lead">One page that makes your startup look legit on day one, and nothing it doesn't need.</p>
     </div>
@@ -82,17 +82,22 @@
     </ul>
   </section>
 
-  <section id="how" class="band">
-    <div class="wrap section story">
-      <div class="story-steps">
-        <h2>How it works</h2>
-        <div class="beat" data-stage="1"><span>1</span><h3>Tell me about it</h3><p>What your startup does, who it's for, and any logo or colours you've already got. That's the brief.</p></div>
-        <div class="beat" data-stage="2"><span>2</span><h3>Check the draft</h3><p>You get a live preview link. Point at what you want changed, I change it.</p></div>
-        <div class="beat" data-stage="3"><span>3</span><h3>Go live</h3><p>I hand over the finished page and the code. Put it on your own domain. It's yours.</p></div>
-      </div>
-      <div class="story-stage" aria-hidden="true">
-        <div class="frame stage" id="stage" data-stage="1">
-          <div class="frame-bar"><span class="url">preview.imakethosepages.com/fernway</span><b class="live">Live</b></div>
+  <section id="how" class="band story-scroll">
+    <div class="story-sticky">
+      <div class="wrap story">
+        <div class="story-steps">
+          <h2>How it works</h2>
+          <div class="rail" aria-hidden="true"><i id="railFill"></i></div>
+          <ol class="beats">
+            <li class="beat on" data-stage="1"><span>1</span><div><h3>Tell me about it</h3><p>What your startup does, who it's for, and any logo or colours you've already got. That's the brief.</p></div></li>
+            <li class="beat" data-stage="2"><span>2</span><div><h3>Check the draft</h3><p>You get a live preview link. Point at what you want changed, I change it.</p></div></li>
+            <li class="beat" data-stage="3"><span>3</span><div><h3>Go live</h3><p>I hand over the finished page and the code. Put it on your own domain. It's yours.</p></div></li>
+          </ol>
+        </div>
+        <div class="story-stage" aria-hidden="true">
+          <div class="stage-progress"><i id="stageFill"></i></div>
+          <div class="frame stage" id="stage" data-stage="1">
+          <div class="frame-bar"><span class="url">Example project: Fernway (made up)</span><b class="live">Live</b></div>
           <div class="brief">
             <p><b>Name</b>Fernway</p><p><b>What it does</b>Expenses for small trade crews</p><p><b>Colours</b><i style="background:#2F7D5B"></i><i style="background:#16302A"></i></p><p><b>Logo</b>Got one, sending it over</p>
           </div>
@@ -104,12 +109,13 @@
             <em class="pin p1">Make this bigger</em><em class="pin p2">Greener button?</em>
           </div>
         </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="deal" class="wrap section">
-    <div class="split">
+    <div class="split" data-depth="0.12">
       <h2>The deal</h2>
       <p class="lead">Loads of people online promise a site then vanish. Here's how I work instead.</p>
     </div>
@@ -127,7 +133,7 @@
 <section id="contact" class="contact-wrap">
   <div class="wrap contact">
     <div>
-      <h2>Got a startup? Let's make its page.</h2>
+      <h2 data-depth="0.1">Got a startup? Let's make its page.</h2>
       <p class="sub">Fill in the form or just email me. I'll get back to you about what you need.</p>
       <a class="mail" href="mailto:lennyvincentsingh@gmail.com"><img src="assets/icons/mail.svg" alt="" width="22" height="22">lennyvincentsingh@gmail.com</a>
     </div>
