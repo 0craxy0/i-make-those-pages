@@ -403,3 +403,11 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:#FB464C;ba
 .gradient-ascii-container{position:relative;width:100%;height:100%;overflow:hidden}
 .gradient-ascii-canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
 .hero-ascii{position:absolute!important;inset:0;height:auto!important;z-index:1;pointer-events:none}
+
+/* React Bits HoloMosaic behind the contact section */
+.holo-mosaic-container{position:relative;width:100%;height:100%;overflow:hidden}
+.holo-mosaic-canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
+.contact-mosaic{position:absolute!important;inset:0;height:auto!important;z-index:0}
+.contact>div:first-child{background:var(--stone);border:1px solid var(--line);border-radius:var(--r);padding:32px;align-self:start}
+.contact>div:first-child .sub{margin-bottom:24px}
+@media (max-width:520px){.contact>div:first-child{padding:22px}}

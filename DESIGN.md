@@ -5,7 +5,7 @@ The hero background is React Bits' Gradient ASCII (WebGL2) rising from the botto
 
 ## Rules
 - Purple is the Obsidian violet accent only. No other hues apart from the green inside the demo preview.
-- Gradients only in two places: the Gradient ASCII hero and the loading skeleton shimmer. Never on text, buttons or backgrounds.
+- Effects only in two places: the Gradient ASCII hero and the HoloMosaic behind the contact section. Never two effects on screen at once, and text never sits straight on an effect: it goes on a solid panel or on dark background. Never on text, buttons or backgrounds.
 - No drop shadows, glass, glows or orbs. Structure comes from 1px `--line` borders.
 - No emoji, sparkles, fake testimonials, made-up stats or fake terminals. The code panel shows the real HTML of the preview.
 - No em dashes in copy, no "not X, it's Y" lines. Sentence case.
@@ -38,6 +38,7 @@ Radius 4px. 1px borders. Buttons are solid blocks, never pills.
 All of it is off under `prefers-reduced-motion`.
 - **Gradient ASCII hero** (`js/gradient-ascii.js`): React Bits' GradientASCII component, ported from React to plain JS with its shaders untouched. Shape `rise`, Obsidian violets, JetBrains Mono glyphs. Characters scramble under the cursor and a click sends a wave. Keep the glow low in the hero so the headline, tagline and buttons stay on dark background. Falls back to a flat CSS sun without WebGL2.
 - **Decrypt headline**: each line unscrambles from symbols on load. On desktop it thins from 800 to 350 weight as you scroll away. The lines never rewrap.
+- **HoloMosaic contact background** (`js/holo-mosaic.js`): React Bits' HoloMosaic, ported to plain JS. Toned down from its defaults: `pearl` spectrum, low saturation, little glitter, lavender metal, edges faded. Tiles tilt toward the cursor; clicking empty space sends a flip wave. Text sits on solid panels on top of it.
 - **Magnetic buttons**: the hero CTA follows the cursor slightly (fine pointers only).
 - **Parallax**: hero text and demo at different speeds (desktop only). Section headings drift at most 40px, so they can't touch the content below.
 - **Scrollytelling** ("How it works"): one pinned scene, the preview goes from brief to draft to live.
