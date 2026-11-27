@@ -617,3 +617,28 @@ details[open]>summary{margin-bottom:10px}
 /* Not fully opaque on purpose: Chrome culls the story ASCII canvas behind an opaque .brief and leaves a blank column */
 .brief{background:rgb(22 22 22 / .985)}
 .brief i{border-radius:4px}
+
+/* ================= MESSAGES (order page and admin) ================= */
+.order-main{display:grid;gap:24px;min-width:0}
+.msgs h2{margin-bottom:0}
+.msgs #msgsEmpty{margin-top:10px}
+.msgs-note{margin-top:12px}
+.thread{list-style:none;display:flex;flex-direction:column;gap:14px;max-height:min(460px,60vh);overflow-y:auto;overscroll-behavior:contain;margin:16px 0;padding:2px 6px 2px 0;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.thread:empty{display:none}
+.msg{display:grid;gap:4px;justify-items:start;max-width:min(85%,520px);transform-origin:bottom left}
+.msg .bubble{background:var(--field);border:1px solid var(--line);border-radius:12px 12px 12px 4px;padding:10px 14px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.95rem;line-height:1.5;color:var(--ink)}
+.msg small{color:var(--muted);font-size:.78rem;padding:0 4px}
+.msg.mine{align-self:flex-end;justify-items:end;transform-origin:bottom right}
+.msg.mine .bubble{background:rgb(123 83 230 / .16);border-color:rgb(168 139 250 / .4);border-radius:12px 12px 4px 12px}
+.msg .seen{color:var(--gold);margin-top:-2px}
+.composer{display:grid;gap:10px;margin-top:12px}
+.thread+.composer{margin-top:0}
+.composer textarea{min-height:84px;max-height:240px;resize:none;line-height:1.5}
+.composer-row{display:flex;justify-content:flex-end;align-items:center;gap:14px;flex-wrap:wrap}
+.composer-row .count{margin-right:auto}
+.composer-row .count.near{color:var(--gold)}
+.composer-row .tell{margin-right:auto;font-size:.88rem}
+.composer-row .tell+.count{margin-right:0}
+.badge{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:var(--r);background:var(--sun);color:#fff;font:600 .72rem/1.5 var(--body);font-style:normal;vertical-align:2px}
+@media (max-width:600px){.msg{max-width:92%}}
+.msg .bubble a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}

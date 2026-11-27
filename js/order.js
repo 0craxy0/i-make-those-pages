@@ -124,6 +124,106 @@
   }
   function fail(msg) { $("loading").hidden = true; $("failed").hidden = false; $("failedMsg").textContent = msg; }
 
+  // ---- Messages: the buyer and me, on this order ----
+  const thread = $("thread"), box = $("msgBox"), sendBtn = $("msgSend"), msgErr = $("msgErr");
+  const MAX = 2000;
+  let lastId = 0, seenUpto = 0, msgsReady = false, polling = null, fetching = false;
+  const stamp = s => {
+    const d = new Date(s), today = new Date().toDateString() === d.toDateString();
+    const time = d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+    return today ? time : `${d.toLocaleDateString("en-GB", { day: "numeric", month: "short" })}, ${time}`;
+  };
+  const nearBottom = () => thread.scrollHeight - thread.scrollTop - thread.clientHeight < 80;
+  // Message text with http(s) links made clickable. Built from text nodes, never innerHTML.
+  const linkify = (el, text) => {
+    const re = /\bhttps?:\/\/[^\s<>"']+/gi;
+    let at = 0, m;
+    while ((m = re.exec(text))) {
+      let url = m[0].replace(/[.,!?;:)\]]+$/, "");
+      if (m.index > at) el.append(text.slice(at, m.index));
+      const a = document.createElement("a");
+      a.href = url; a.textContent = url; a.target = "_blank"; a.rel = "noopener noreferrer nofollow ugc";
+      el.append(a);
+      at = m.index + url.length; re.lastIndex = at;
+    }
+    if (at < text.length) el.append(text.slice(at));
+  };
+  function addMsg(m, animate) {
+    if (m.id <= lastId) return null;
+    lastId = m.id;
+    const mine = m.from === "buyer";
+    const li = document.createElement("li");
+    li.className = "msg" + (mine ? " mine" : "");
+    li.dataset.id = m.id;
+    const bubble = document.createElement("p"); bubble.className = "bubble"; linkify(bubble, m.body);
+    const meta = document.createElement("small");
+    meta.textContent = `${mine ? "You" : "I Make Those Pages"}, ${stamp(m.at)}`;
+    li.append(bubble, meta);
+    thread.append(li);
+    if (animate && window.RB && window.RB.popIn) window.RB.popIn(li);
+    return li;
+  }
+  function markSeen() {
+    thread.querySelectorAll(".seen").forEach(el => el.remove());
+    const seen = [...thread.querySelectorAll(".msg.mine")].filter(li => Number(li.dataset.id) <= seenUpto).pop();
+    if (seen) { const s = document.createElement("small"); s.className = "seen"; s.textContent = "Seen"; seen.append(s); }
+  }
+  function showEmpty() { $("msgsEmpty").hidden = thread.children.length > 0; }
+
+  async function fetchMsgs() {
+    if (fetching || document.hidden) return;
+    fetching = true;
+    try {
+      const res = await fetch(`${API}/messages?t=${encodeURIComponent(token)}&after=${lastId}`, { cache: "no-store" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Couldn't load messages.");
+      const stick = !msgsReady || nearBottom();
+      let fromMe = false;
+      (data.messages || []).forEach(m => { if (addMsg(m, msgsReady) && m.from === "owner") fromMe = true; });
+      seenUpto = data.seen_upto || 0;
+      markSeen(); showEmpty();
+      if (stick) thread.scrollTop = thread.scrollHeight;
+      $("msgState").textContent = "";
+      // A reply often comes with a change to the order (a quote, a draft), so refresh that too
+      if (fromMe && msgsReady) load();
+      msgsReady = true;
+    } catch (e) {
+      $("msgState").textContent = "Couldn't refresh messages";
+    } finally { fetching = false; }
+  }
+  function startMessages() {
+    if (polling) return;
+    fetchMsgs();
+    polling = setInterval(fetchMsgs, 15000);
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) fetchMsgs(); });
+  }
+
+  const grow = () => { box.style.height = "auto"; box.style.height = Math.min(box.scrollHeight + 2, 240) + "px"; };
+  box.addEventListener("input", () => {
+    grow();
+    const left = MAX - [...box.value].length;
+    $("msgCount").textContent = left < 300 ? `${left} left` : "";
+    $("msgCount").classList.toggle("near", left < 100);
+    msgErr.hidden = true;
+  });
+  box.addEventListener("keydown", e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); $("composer").requestSubmit(); } });
+  $("composer").addEventListener("submit", async e => {
+    e.preventDefault();
+    const body = box.value.trim();
+    if (!body) { box.focus(); return; }
+    sendBtn.disabled = true; sendBtn.textContent = "Sending…"; msgErr.hidden = true;
+    try {
+      const res = await fetch(`${API}/messages`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ t: token, body }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.message) throw new Error(data.error || "Couldn't send that. Try again.");
+      addMsg(data.message, true); markSeen(); showEmpty();
+      thread.scrollTop = thread.scrollHeight;
+      box.value = ""; grow(); $("msgCount").textContent = "";
+    } catch (err) {
+      msgErr.textContent = err instanceof TypeError ? "Couldn't reach the server. Check your connection and try again." : err.message; msgErr.hidden = false;
+    } finally { sendBtn.disabled = false; sendBtn.textContent = "Send"; }
+  });
+
   // Fresh order: show the "save this link" box with a clean URL
   if (params.get("new") === "1") {
     const clean = `${location.origin}${location.pathname}?t=${token}`;
@@ -138,6 +238,7 @@
   // Back from Stripe: Stripe tells my server a moment later, so keep checking for a bit
   const paid = params.get("paid");
   load().then(o => {
+    if (o) startMessages();
     if (!paid || !o) return;
     history.replaceState(null, "", `${location.pathname}?t=${token}`);
     const note = $("paidNote");

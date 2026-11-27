@@ -43,12 +43,13 @@
       b.children[1].textContent = STATUS[r.status] + (r.quote_pence ? `, ${gbp(r.quote_pence)}` : "");
       b.children[2].textContent = when(r.created_at);
       if (r.status === "new" || r.status === "balance_paid") b.classList.add("attention");
-      b.addEventListener("click", () => { location.hash = r.ref; open(r.ref); });
+      if (r.unread) { const n = document.createElement("em"); n.className = "badge"; n.textContent = `${r.unread} new`; n.title = `${r.unread} unread message${r.unread > 1 ? "s" : ""}`; b.children[0].append(n); }
+      b.addEventListener("click", () => { if (decodeURIComponent(location.hash.slice(1)) === r.ref) open(r.ref); else location.hash = r.ref; });
       li.append(b); return li;
     }));
     if (!rows.length) $("list").innerHTML = '<li class="muted">No orders yet.</li>';
     const want = decodeURIComponent(location.hash.slice(1));
-    if (want) open(want);
+    if (want && (!current || current.ref !== want)) open(want);
   }
   $("refresh").addEventListener("click", () => list().catch(() => {}));
 
@@ -79,7 +80,14 @@ Then:
 4. Tell me the price, the summary and the steps.
 
 Later, when I say a step is done, tick it with select public.tick_step('${o.ref}', <step position>);
-Draft link: select public.set_draft_url('${o.ref}', '<https link>');`;
+Draft link: select public.set_draft_url('${o.ref}', '<https link>');
+Read their messages: select public.owner_messages('${o.ref}');
+Message the buyer (shows on their order page): select public.owner_send_message('${o.ref}', '<text>');${threadText(o)}`;
+  }
+  function threadText(o) {
+    const msgs = (o.thread && o.thread.messages) || [];
+    if (!msgs.length) return "";
+    return "\n\nMessages so far (oldest first):\n" + msgs.map(m => `${m.from === "buyer" ? "Buyer" : "Me"}: ${m.body}`).join("\n");
   }
 
   async function open(ref) {
@@ -99,6 +107,13 @@ Draft link: select public.set_draft_url('${o.ref}', '<https link>');`;
         <a class="btn small ghost" target="_blank" rel="noopener" data-do="view">Open buyer's page</a>
       </div>
       <p class="fine status-msg" role="status"></p>
+      <h3>Messages</h3>
+      <p class="muted no-msgs">No messages yet.</p>
+      <ol class="thread admin-thread" aria-label="Messages with the buyer"></ol>
+      <form class="composer" data-composer novalidate>
+        <textarea maxlength="2000" rows="3" aria-label="Reply to the buyer"></textarea>
+        <div class="composer-row"><a class="linkbtn tell" hidden>Email them that you replied</a><span class="count fine"></span><button class="btn small">Send reply</button></div>
+      </form>
       <h3>Steps</h3>
       <ol class="checklist admin-steps"></ol>
       <h3>Draft link</h3>
@@ -124,6 +139,9 @@ Draft link: select public.set_draft_url('${o.ref}', '<https link>');`;
     }
     d.querySelector(".pay-log").textContent = (o.payments || []).filter(p => p.status === "paid").map(p => `${p.kind === "deposit" ? "Deposit" : "Rest"} ${gbp(p.amount_pence)} paid ${when(p.paid_at)}`).join(". ") || "No payments yet.";
     current = o;
+    renderThread(o);
+    const badge = document.querySelector(`#list button[data-ref="${CSS.escape(ref)}"] .badge`);
+    if (badge) badge.remove();
 
     const steps = d.querySelector(".admin-steps");
     steps.replaceChildren(...o.steps.map(s => {
@@ -143,6 +161,106 @@ Draft link: select public.set_draft_url('${o.ref}', '<https link>');`;
 
   }
 
+
+  // ---- Messages with the buyer ----
+  const drafts = {};
+  let lastMsg = 0;
+  const stamp = s => new Date(s).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+  // Message text with http(s) links made clickable. Built from text nodes, never innerHTML.
+  const linkify = (el, text) => {
+    const re = /\bhttps?:\/\/[^\s<>"']+/gi;
+    let at = 0, m;
+    while ((m = re.exec(text))) {
+      let url = m[0].replace(/[.,!?;:)\]]+$/, "");
+      if (m.index > at) el.append(text.slice(at, m.index));
+      const a = document.createElement("a");
+      a.href = url; a.textContent = url; a.target = "_blank"; a.rel = "noopener noreferrer nofollow ugc";
+      el.append(a);
+      at = m.index + url.length; re.lastIndex = at;
+    }
+    if (at < text.length) el.append(text.slice(at));
+  };
+  function addMsg(list, m, name) {
+    if (m.id <= lastMsg) return;
+    lastMsg = m.id;
+    const li = document.createElement("li");
+    li.className = "msg" + (m.from === "owner" ? " mine" : "");
+    li.dataset.id = m.id;
+    const p = document.createElement("p"); p.className = "bubble"; linkify(p, m.body);
+    const meta = document.createElement("small"); meta.textContent = `${m.from === "owner" ? "You" : name}, ${stamp(m.at)}`;
+    li.append(p, meta); list.append(li);
+  }
+  function seenMark(list, upto) {
+    list.querySelectorAll(".seen").forEach(el => el.remove());
+    const li = [...list.querySelectorAll(".msg.mine")].filter(x => Number(x.dataset.id) <= upto).pop();
+    if (li) { const s = document.createElement("small"); s.className = "seen"; s.textContent = "Seen"; li.append(s); }
+  }
+  function renderThread(o) {
+    const d = $("detail"), list = d.querySelector(".admin-thread"), box = d.querySelector("[data-composer] textarea");
+    lastMsg = 0;
+    const msgs = (o.thread && o.thread.messages) || [];
+    msgs.forEach(m => addMsg(list, m, o.name));
+    seenMark(list, (o.thread && o.thread.seen_upto) || 0);
+    d.querySelector(".no-msgs").hidden = msgs.length > 0;
+    list.scrollTop = list.scrollHeight;
+    box.placeholder = `Reply to ${o.name.split(" ")[0]}`;
+    box.value = drafts[o.ref] || "";
+    const tell = d.querySelector(".tell");
+    tell.href = `mailto:${o.email}?subject=${encodeURIComponent(`Reply on your order ${o.ref}`)}&body=${encodeURIComponent(`Hi ${o.name.split(" ")[0]},\n\nI've replied to your message on your order page:\n${SITE}/order.html?t=${o.token}\n`)}`;
+  }
+  const keep = (o, m) => {
+    o.thread = o.thread || { messages: [] };
+    if (!o.thread.messages.some(x => x.id === m.id)) o.thread.messages.push(m);
+  };
+  async function pollThread() {
+    const o = current, d = $("detail");
+    if (!o || document.hidden || !key) return;
+    const list = d.querySelector(".admin-thread");
+    if (!list) return;
+    try {
+      const r = await call({ action: "thread", ref: o.ref, after: lastMsg });
+      if (current !== o) return;
+      const stick = list.scrollHeight - list.scrollTop - list.clientHeight < 80;
+      (r.result.messages || []).forEach(m => { addMsg(list, m, o.name); keep(o, m); });
+      seenMark(list, r.result.seen_upto || 0);
+      d.querySelector(".no-msgs").hidden = list.children.length > 0;
+      if (stick) list.scrollTop = list.scrollHeight;
+    } catch {}
+  }
+  setInterval(pollThread, 15000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) pollThread(); });
+
+  $("detail").addEventListener("input", e => {
+    if (!e.target.matches("[data-composer] textarea") || !current) return;
+    const box = e.target, left = 2000 - [...box.value].length;
+    drafts[current.ref] = box.value;
+    box.style.height = "auto"; box.style.height = Math.min(box.scrollHeight + 2, 240) + "px";
+    const c = $("detail").querySelector("[data-composer] .count");
+    c.textContent = left < 300 ? `${left} left` : ""; c.classList.toggle("near", left < 100);
+  });
+  $("detail").addEventListener("keydown", e => {
+    if (e.target.matches("[data-composer] textarea") && e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); e.target.form.requestSubmit(); }
+  });
+  $("detail").addEventListener("submit", async e => {
+    if (!e.target.matches("[data-composer]") || !current) return;
+    e.preventDefault();
+    const o = current, form = e.target, box = form.querySelector("textarea"), btn = form.querySelector("button");
+    const body = box.value.trim();
+    if (!body) { box.focus(); return; }
+    btn.disabled = true; btn.textContent = "Sending…";
+    try {
+      const r = await call({ action: "reply", ref: o.ref, body });
+      const list = $("detail").querySelector(".admin-thread");
+      addMsg(list, r.result, o.name); keep(o, r.result);
+      $("detail").querySelector(".no-msgs").hidden = true;
+      list.scrollTop = list.scrollHeight;
+      box.value = ""; box.style.height = ""; drafts[o.ref] = "";
+      form.querySelector(".count").textContent = "";
+      form.querySelector(".tell").hidden = false;
+      say("Sent. They'll see it on their order page. Email them if it's urgent.");
+    } catch (err) { if (err.message !== "locked") say(err.message); }
+    finally { btn.disabled = false; btn.textContent = "Send reply"; }
+  });
 
   const say = t => { const m = document.querySelector("#detail .status-msg"); if (m) m.textContent = t; };
   $("detail").addEventListener("click", async e => {

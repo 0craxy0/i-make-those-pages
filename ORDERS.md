@@ -9,12 +9,21 @@
 6. Add the draft link, then tick "Draft ready". The buyer can now approve it and pay the other 50%.
 7. Stripe takes the rest, "Rest paid" ticks itself, Discord tells you. Hand over the files and tick "Handover". Done.
 
+## Messages
+- The buyer can message you from their order page at any point. Each message pings your Discord with a link to the order on `admin.html`.
+- Reply on the admin page (the Messages box on the order). Orders with unread messages show an "N new" badge in the list.
+- Buyers don't get an email when you reply. They see it next time they open their page, which checks for new messages every 15 seconds while it's open. If it's urgent, press **Email them that you replied** after sending.
+- Both sides see "Seen" once the other side has opened the thread.
+- Claude can read and send messages too (the copied prompt includes the thread):
+  `select public.owner_messages('IMTP-XXXXX');` and `select public.owner_send_message('IMTP-XXXXX', 'text');`
+- Limits: 2,000 characters a message, buyers can send 8 messages per 10 minutes, 500 messages per order. No file uploads: buyers send links.
+
 Steps that tick themselves: Order received, Quote ready, Deposit paid, Rest paid. You can't tick work steps before the deposit, the draft before the work and a draft link, or handover before the rest is paid.
 
 ## Where things live
 - Database and server code: Supabase project `i-make-those-pages` (`wydreptloanesxblcdra`, London).
-- Functions: `create-order`, `get-order`, `pay`, `stripe-webhook`, `admin`. Source in `supabase/functions/`.
-- Database helpers Claude uses: `set_quote`, `tick_step`, `set_draft_url`, `cancel_order`.
+- Functions: `create-order`, `get-order`, `messages`, `pay`, `stripe-webhook`, `admin`. Source in `supabase/functions/`. Database changes in `supabase/migrations/`.
+- Database helpers Claude uses: `set_quote`, `tick_step`, `set_draft_url`, `cancel_order`, `owner_messages`, `owner_send_message`.
 
 ## One-time setup (you do these, they're secrets)
 Supabase dashboard, project `i-make-those-pages`, Edge Functions, Secrets. Add:
@@ -29,5 +38,5 @@ Supabase dashboard, project `i-make-those-pages`, Edge Functions, Secrets. Add:
 Test with Stripe's test card 4242 4242 4242 4242 (any future date, any CVC). When it all works, swap both Stripe secrets for the live ones and add a live-mode webhook the same way.
 
 ## Not done yet
-- Buyers don't get automatic emails. Email them their link when the quote is ready (or add an email service later).
+- Buyers don't get automatic emails, for quotes or message replies. Email them their link yourself (or add an email service later; the vault's Bell Toggle is held for an "email me updates" switch).
 - Refunds are done in the Stripe dashboard, then cancel the order on the admin page.

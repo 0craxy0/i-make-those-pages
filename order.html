@@ -41,10 +41,24 @@
     </div>
 
     <div class="order-grid">
-      <section class="panel" aria-labelledby="progressTitle">
-        <h2 id="progressTitle">Progress</h2>
-        <ol class="checklist" id="steps"></ol>
-      </section>
+      <div class="order-main">
+        <section class="panel" aria-labelledby="progressTitle">
+          <h2 id="progressTitle">Progress</h2>
+          <ol class="checklist" id="steps"></ol>
+        </section>
+
+        <section class="panel msgs" id="msgs" aria-labelledby="msgsTitle">
+          <div class="row-between"><h2 id="msgsTitle">Messages</h2><span class="fine" id="msgState" role="status"></span></div>
+          <p class="muted" id="msgsEmpty">Questions, changes, or links to your logo and photos: send them here and I'll reply on this page.</p>
+          <ol class="thread" id="thread" aria-label="Messages about this order"></ol>
+          <form class="composer" id="composer" novalidate>
+            <textarea id="msgBox" maxlength="2000" rows="3" placeholder="Write a message" aria-label="Your message"></textarea>
+            <div class="composer-row"><span class="count fine" id="msgCount" aria-live="polite"></span><button class="btn small" id="msgSend">Send</button></div>
+            <p class="err" id="msgErr" role="alert" hidden></p>
+          </form>
+          <p class="fine msgs-note">You won't get an email when I reply, so check back here. Don't send passwords or card details.</p>
+        </section>
+      </div>
 
       <div class="order-side">
         <section class="panel" id="quoteBox" aria-labelledby="quoteTitle">

@@ -50,7 +50,7 @@ From the Obsidian vault "Diagrams", ported from React to plain JS in `js/react-b
 | HoloMosaic | Contact section background | `js/holo-mosaic.js` |
 | Magic Bento | "What you get" grid | `[data-bento]` |
 | Line Sidebar | "How it works" step nav | `RB.lineSidebar` in `js/motion.js` |
-| Animated List | "The deal" terms | `[data-animated-list]` |
+| Animated List | "The deal" terms; its pop-in spring for new chat messages | `[data-animated-list]`, `RB.popIn` |
 | Specular Button | Hero, minibar and send buttons | `[data-specular]` |
 | Slide Commit | Pay deposit and balance on `order.html` | `RB.slideCommit` in `js/order.js` |
 
@@ -77,4 +77,4 @@ All of it is off under `prefers-reduced-motion`.
 - The footer ends on a huge "I make those." sign-off.
 
 ## Orders
-Order form on the home page, the buyer's `order.html` and the owner's `admin.html` use the same panels, checklist and buttons. Payment and setup details are in `ORDERS.md`.
+Order form on the home page, the buyer's `order.html` and the owner's `admin.html` use the same panels, checklist and buttons. Messages on both pages use the same thread: the sender's own bubbles sit right in faint violet, the other side's sit left on `--field`, with a 4px corner pointing at the sender. Payment and setup details are in `ORDERS.md`.

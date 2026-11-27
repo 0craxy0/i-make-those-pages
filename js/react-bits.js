@@ -378,6 +378,17 @@ void main() {
     addEventListener("resize", place, { passive: true });
   };
 
+  /* Pops one new element in with AnimatedList's spring. Used for new chat messages. */
+  RB.popIn = el => {
+    if (reduced()) return;
+    el.style.transition = "none";
+    el.style.transform = HIDDEN.pop.below; el.style.opacity = "0";
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.style.transition = `transform 620ms ${AL_SPRING}, opacity 300ms cubic-bezier(0.22, 1, 0.36, 1)`;
+      el.style.transform = ""; el.style.opacity = "";
+    }));
+  };
+
   /* ------------------------------------------------------------------ *
    * SlideCommit: drag the handle to the end to confirm. Shows a spinner
    * while the promise runs, a done pill if it resolves, shakes if not.
