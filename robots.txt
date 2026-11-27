@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /thanks.html
+
+Sitemap: https://0craxy0.github.io/i-make-those-pages/sitemap.xml

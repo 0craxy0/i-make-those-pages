@@ -4,8 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>I Make Those Pages | Startup pages, made properly</title>
-<meta name="description" content="I build clean, fast landing pages for startups. You see the draft first and you own the code.">
+<meta name="description" content="I build clean, fast landing pages for startups. You see the draft first, the price is agreed up front, and you own the code.">
+<link rel="canonical" href="https://0craxy0.github.io/i-make-those-pages/">
+<meta name="theme-color" content="#F2643A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="I Make Those Pages">
+<meta property="og:title" content="I Make Those Pages | Startup pages, made properly">
+<meta property="og:description" content="I build clean, fast landing pages for startups. You see the draft first, the price is agreed up front, and you own the code.">
+<meta property="og:url" content="https://0craxy0.github.io/i-make-those-pages/">
+<meta property="og:image" content="https://0craxy0.github.io/i-make-those-pages/assets/og-image.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Your startup needs a page. I make those. A flat orange sunset with the I Make Those Pages logo.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -117,10 +131,10 @@
       <p class="sub">Fill in the form or just email me. I'll get back to you about what you need.</p>
       <a class="mail" href="mailto:lennyvincentsingh@gmail.com"><img src="assets/icons/mail.svg" alt="" width="22" height="22">lennyvincentsingh@gmail.com</a>
     </div>
-    <form id="contactForm" class="form">
+    <form id="contactForm" class="form" novalidate>
       <div class="row">
-        <label>Your name<input name="name" autocomplete="name" required></label>
-        <label>Your email<input name="email" type="email" autocomplete="email" required></label>
+        <label>Your name<input name="name" autocomplete="name" required aria-describedby="e-name"><span class="err" id="e-name" hidden>Put your name in so I know who I'm talking to.</span></label>
+        <label>Your email<input name="email" type="email" autocomplete="email" required aria-describedby="e-email"><span class="err" id="e-email" hidden>That email doesn't look right. Check it and try again.</span></label>
       </div>
       <label>Startup name or website<input name="startup" placeholder="e.g. fernway.com"></label>
       <label>What do you need?
@@ -130,20 +144,23 @@
           <option>Not sure yet, let's chat</option>
         </select>
       </label>
-      <label>Tell me about it<textarea name="message" required></textarea></label>
-      <button class="btn" type="submit">Send message <img src="assets/icons/send.svg" alt="" width="16" height="16"></button>
+      <label>Tell me about it<textarea name="message" required aria-describedby="e-message"></textarea><span class="err" id="e-message" hidden>Tell me a bit about your startup first.</span></label>
+      <button class="btn" type="submit" id="sendBtn">Send message <img src="assets/icons/send.svg" alt="" width="16" height="16"></button>
       <p class="note">Opens your email app with everything filled in. See the <a href="privacy.html">privacy policy</a> for what I do with it.</p>
     </form>
   </div>
 </section>
 
+<a href="#contact" class="btn mcta" id="mcta">Get your page made</a>
+
 <footer class="wrap foot">
   <img src="assets/logo.svg" alt="I Make Those Pages" width="200" height="40">
-  <nav><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="https://github.com/0craxy0">GitHub</a></nav>
+  <nav><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><button type="button" class="linkbtn" data-consent-open>Cookie settings</button><a href="https://github.com/0craxy0">GitHub</a></nav>
   <span>© <span id="yr"></span></span>
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/consent.js"></script>
 <script src="js/motion.js"></script>
 <script src="js/sun.js"></script>
 </body>
